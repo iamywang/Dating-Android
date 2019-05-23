@@ -1,5 +1,6 @@
 package cn.iamywang.mapchats
 
+import android.icu.util.Calendar
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,18 +17,34 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val id:TextView = findViewById(R.id.register_e1)
-        id.setText(Random.nextInt(1,10000))
+        val regdate: TextView = findViewById(R.id.register_e8)
+        val rand = Random(1111)
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+        val mon = String.format("%0" + 2 + "d", month)
+        val days = String.format("%0" + 2 + "d", day)
+        val hou = String.format("%0" + 2 + "d", hour)
+        val min = String.format("%0" + 2 + "d", minute)
+        val sec = String.format("%0" + 2 + "d", second)
+        val str = StringBuffer("")
+        str.append(year).append(".").append(mon).append(".").append(days).append(" ").append(hou).append(":").append(min).append(":").append(sec)
+        id.setText(rand.nextInt(10000).toString())
+        regdate.setText(str.toString())
     }
 
     fun Submit(view: View){
-        val id: EditText = findViewById(R.id.user_e1)
-        val nick: EditText = findViewById(R.id.user_e2)
-        val sex: EditText = findViewById(R.id.user_e3)
-        val birth: EditText = findViewById(R.id.user_e4)
-        val height: EditText = findViewById(R.id.user_e5)
-        val weight: EditText = findViewById(R.id.user_e6)
-//        val online: EditText = findViewById(R.id.user_e7)
-        val regdate: EditText = findViewById(R.id.user_e8)
+        val id: TextView = findViewById(R.id.register_e1)
+        val nick: EditText = findViewById(R.id.register_e2)
+        val sex: EditText = findViewById(R.id.register_e3)
+        val birth: EditText = findViewById(R.id.register_e4)
+        val height: EditText = findViewById(R.id.register_e5)
+        val weight: EditText = findViewById(R.id.register_e6)
+        val regdate: TextView = findViewById(R.id.register_e8)
         Http.init(this)
         val act = this
         Http.post {

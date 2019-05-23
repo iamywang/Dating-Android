@@ -82,7 +82,7 @@ class SplashActivity : AppCompatActivity() {
 
                     // 正常跳转到登录界面
                     MSG_LAUNCH -> {
-                        activity.startActivity(Intent(activity, LoginActivity::class.java))
+                        activity.startActivity(Intent(activity, MainActivity::class.java))
                         activity.finish()
                     }
                 }

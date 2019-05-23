@@ -10,9 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import android.widget.Toast;
 import com.amap.api.location.AMapLocation;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
 
-    private TextView mLocationErrText;
     private static final int STROKE_COLOR = Color.argb(180, 3, 145, 255);
     private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
     private boolean mFirstFix = false;
@@ -65,15 +63,6 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         navigationView.setNavigationItemSelectedListener(this);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
-
-//        Intent intent = getIntent();
-//        Bundle bundle = intent.getBundleExtra("Message");
-//        String name = bundle.getString("name");
-//        String num = bundle.getString("num");
-//        TextView nick = findViewById(R.id.textView_name);
-//        TextView id = findViewById(R.id.textView_id);
-//        nick.setText(name);
-//        id.setText(num);
         init();
     }
 
@@ -85,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-            this.startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            this.startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_my) {
-            this.startActivity(new Intent(MainActivity.this,UserInfoActivity.class));
+            this.startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
         } else if (id == R.id.nav_map) {
             Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_friends) {
@@ -105,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     /**
      * 初始化
      */
@@ -117,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         if (mSensorHelper != null) {
             mSensorHelper.registerSensorListener();
         }
-//        mLocationErrText = (TextView) findViewById(R.id.location_errInfo_text);
-//        mLocationErrText.setVisibility(View.GONE);
     }
 
     /**
@@ -192,9 +180,8 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         if (mListener != null && amapLocation != null) {
             if (amapLocation != null
                     && amapLocation.getErrorCode() == 0) {
-
-                mLocationErrText.setVisibility(View.GONE);
                 LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
+
                 if (!mFirstFix) {
                     mFirstFix = true;
                     addCircle(location, amapLocation.getAccuracy());//添加定位精度圆
@@ -209,9 +196,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
                 }
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
-                Toast.makeText(MainActivity.this, errText, Toast.LENGTH_LONG).show();
-                mLocationErrText.setVisibility(View.VISIBLE);
-                mLocationErrText.setText(errText);
+                Log.e("AmapErr", errText);
             }
         }
     }
