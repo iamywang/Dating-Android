@@ -1,5 +1,6 @@
 package cn.iamywang.mapchats
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -31,12 +32,31 @@ class LoginActivity : AppCompatActivity() {
             onSuccess { bytes ->
                 // handle data
                 Toast.makeText(act, bytes.toString(Charset.defaultCharset()), Toast.LENGTH_LONG).show()
-//                val nick:TextView = findViewById(R.id.textView_name)
-//                val id:TextView = findViewById(R.id.textView_id)
-//                nick.setText("")
-//                id.setText("")
+                val bundle = Bundle()
+                val intent= Intent(act, MainActivity::class.java)
+//                val name="admin"
+//                val num="123";
+//                bundle.putString("name", name)
+//                bundle.putString("num",num)
+//                intent.putExtra("Message",bundle)
+                startActivity(intent)
+                act.finish()
+            }
+            onFinish {
+                val bundle = Bundle()
+                val intent= Intent(act, MainActivity::class.java)
+//                val name="admin"
+//                val num="123";
+//                bundle.putString("name", name)
+//                bundle.putString("num",num)
+//                intent.putExtra("Message",bundle)
+                startActivity(intent)
                 act.finish()
             }
         }
+    }
+
+    fun onButtonClick1(view: View){
+        this.startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

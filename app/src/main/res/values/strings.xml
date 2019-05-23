@@ -5,6 +5,7 @@
     <string name="menu_home">登录</string>
     <string name="menu_my">我的</string>
     <string name="menu_map">地图</string>
+    <string name="menu_gps">历史位置</string>
     <string name="menu_friends">好友</string>
     <string name="menu_chat">聊天</string>
     <string name="menu_share">分享</string>
@@ -28,4 +29,5 @@
 
     <string name="title_activity_login">登录</string>
     <string name="title_activity_user">个人信息</string>
+    <string name="title_activity_reg">注册</string>
 </resources>

@@ -1,24 +1,17 @@
 package cn.iamywang.mapchats;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 
 import android.widget.Toast;
@@ -72,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         navigationView.setNavigationItemSelectedListener(this);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
+
+//        Intent intent = getIntent();
+//        Bundle bundle = intent.getBundleExtra("Message");
+//        String name = bundle.getString("name");
+//        String num = bundle.getString("num");
+//        TextView nick = findViewById(R.id.textView_name);
+//        TextView id = findViewById(R.id.textView_id);
+//        nick.setText(name);
+//        id.setText(num);
         init();
     }
 
@@ -83,11 +85,11 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            this.startActivity(new Intent(MainActivity.this,LoginActivity.class));
         } else if (id == R.id.nav_my) {
-            startActivity(new Intent(MainActivity.this,UserInfoActivity.class));
+            this.startActivity(new Intent(MainActivity.this,UserInfoActivity.class));
         } else if (id == R.id.nav_map) {
-
+            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_friends) {
             Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_chat) {

@@ -9,6 +9,15 @@
         tools:showIn="@layout/activity_login"
         tools:context=".LoginActivity">
 
+    <Button
+            android:text="@string/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/editText2"
+            android:onClick="onButtonClick"/>
     <TextView
             android:text="@string/username"
             android:layout_width="wrap_content"
@@ -33,14 +42,14 @@
             android:layout_marginEnd="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/login_image"/>
     <Button
-            android:text="@string/login"
+            android:text="注册"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/login_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="72dp"
-            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/editText2"
-            android:onClick="onButtonClick"/>
+            android:onClick="onButtonClick1"
+            app:layout_constraintEnd_toStartOf="@+id/login_button2"
+            android:layout_marginEnd="12dp" android:layout_marginTop="28dp"
+            app:layout_constraintTop_toBottomOf="@+id/editText2"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

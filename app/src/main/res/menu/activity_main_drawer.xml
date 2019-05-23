@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_map"
             android:title="@string/menu_map" />
         <item
+                android:id="@+id/nav_gps"
+                android:icon="@drawable/ic_map"
+                android:title="@string/menu_gps" />
+        <item
             android:id="@+id/nav_friends"
             android:icon="@drawable/ic_friend"
             android:title="@string/menu_friends" />
