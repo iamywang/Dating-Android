@@ -24,13 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@string/user_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" android:id="@+id/textView_name"/>
+            android:text="请登录"
+            android:id="@+id/textView_name" android:textSize="18sp" android:textColor="@android:color/white"/>
 
     <TextView
-        android:id="@+id/textView_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_id" />
+            android:id="@+id/textView_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请登录" android:textSize="14sp" android:textColor="@android:color/holo_orange_light"/>
 
 </LinearLayout>

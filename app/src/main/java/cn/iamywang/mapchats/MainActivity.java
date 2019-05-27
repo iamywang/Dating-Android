@@ -13,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -30,11 +33,14 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 
+import java.text.DecimalFormat;
+
 /**
  * 定位图标箭头指向手机朝向
  */
 public class MainActivity extends AppCompatActivity implements LocationSource,
-        AMapLocationListener,NavigationView.OnNavigationItemSelectedListener {
+        AMapLocationListener, NavigationView.OnNavigationItemSelectedListener {
+    private String USERID = "1";
     private AMap aMap;
     private MapView mapView;
     private OnLocationChangedListener mListener;
@@ -48,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
     private SensorEventHelper mSensorHelper;
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "mylocation";
+    private double curLat, curLon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,23 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         init();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 在申请码和返回码都符合的时候，接收返回的数据
+        if (requestCode == 1 && resultCode == 2) {
+            TextView id = findViewById(R.id.textView_id);
+            TextView nick = findViewById(R.id.textView_name);
+            this.USERID = data.getStringExtra("id");
+            id.setText(this.USERID);
+            nick.setText(data.getStringExtra("name"));
+        }
+    }
+
+    public void OnButtonUploadClick(View view) {
+        Toast.makeText(this, "上传成功", Toast.LENGTH_LONG).show();
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -74,11 +98,14 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-            this.startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            this.startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), 1);
+            item.setVisible(false);
         } else if (id == R.id.nav_my) {
-            this.startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
+            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+            intent.putExtra("id", this.USERID);
+            startActivity(intent);
         } else if (id == R.id.nav_map) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
+
         } else if (id == R.id.nav_friends) {
             Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_chat) {
@@ -181,13 +208,18 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
             if (amapLocation != null
                     && amapLocation.getErrorCode() == 0) {
                 LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
-
+                DecimalFormat df = new DecimalFormat("0.000000");
+                this.curLat = location.latitude;
+                this.curLon = location.longitude;
+                Button loc = findViewById(R.id.map_button);
+                String res = "" + df.format(this.curLat) + "," + df.format(this.curLon);
+                loc.setText(res);
                 if (!mFirstFix) {
                     mFirstFix = true;
                     addCircle(location, amapLocation.getAccuracy());//添加定位精度圆
                     addMarker(location);//添加定位图标
                     mSensorHelper.setCurrentMarker(mLocMarker);//定位图标旋转
-                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,18));
+                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
                 } else {
                     mCircle.setCenter(location);
                     mCircle.setRadius(amapLocation.getAccuracy());

@@ -2,9 +2,13 @@ package cn.iamywang.mapchats
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.reflect.TypeToken
 import com.ohmerhe.kolley.request.Http
 import java.nio.charset.Charset
 
@@ -13,14 +17,36 @@ class UserInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
+        val infointent = intent
+        val infoid = infointent.getStringExtra("id").toString()
         Http.init(this)
-        Http.get {
-            url = "http://192.168.2.234:8000/getUsers/"
+        Http.post {
+            url = "http://192.168.2.234:8000/getUserInfo/"
             params {
-                "key" - "all"
+                "id" - infoid
             }
             onSuccess { bytes ->
-                // handle data
+                val str = bytes.toString(Charset.defaultCharset())
+                data class A(
+                    val id: Int,
+                    val name: String,
+                    val birth: String,
+                    val sex: String,
+                    val height: Int,
+                    val weight: Int,
+                    val online: String,
+                    val reg: String
+                )
+                val list = Gson().fromJson(str, A::class.java)
+                val id: EditText = findViewById(R.id.user_e1)
+                id.setText(infoid)
+//                val nick: EditText = findViewById(R.id.user_e2)
+//                val sex: EditText = findViewById(R.id.user_e3)
+//                val birth: EditText = findViewById(R.id.user_e4)
+//                val height: EditText = findViewById(R.id.user_e5)
+//                val weight: EditText = findViewById(R.id.user_e6)
+//                val online: EditText = findViewById(R.id.user_e7)
+//                val regdate: EditText = findViewById(R.id.user_e8)
             }
         }
     }
@@ -32,7 +58,6 @@ class UserInfoActivity : AppCompatActivity() {
         val birth: EditText = findViewById(R.id.user_e4)
         val height: EditText = findViewById(R.id.user_e5)
         val weight: EditText = findViewById(R.id.user_e6)
-        val online: EditText = findViewById(R.id.user_e7)
         val regdate: EditText = findViewById(R.id.user_e8)
         Http.init(this)
         val act = this

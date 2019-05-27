@@ -16,9 +16,9 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        val id:TextView = findViewById(R.id.register_e1)
+        val id: TextView = findViewById(R.id.register_e1)
         val regdate: TextView = findViewById(R.id.register_e8)
-        val rand = Random(1111)
+        val rand = Random(Calendar.MINUTE * Calendar.SECOND)
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
@@ -32,12 +32,13 @@ class RegisterActivity : AppCompatActivity() {
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append(".").append(mon).append(".").append(days).append(" ").append(hou).append(":").append(min).append(":").append(sec)
+        str.append(year).append(".").append(mon).append(".").append(days).append(" ").append(hou).append(":")
+            .append(min).append(":").append(sec)
         id.setText(rand.nextInt(10000).toString())
         regdate.setText(str.toString())
     }
 
-    fun Submit(view: View){
+    fun Submit(view: View) {
         val id: TextView = findViewById(R.id.register_e1)
         val nick: EditText = findViewById(R.id.register_e2)
         val sex: EditText = findViewById(R.id.register_e3)
@@ -48,8 +49,8 @@ class RegisterActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://192.168.2.234:8000/insertUser/"
-            params{
+            url = "http://10.27.246.15:8000/insertUser/"
+            params {
                 "id" - id.text.toString()
                 "name" - nick.text.toString()
                 "sex" - sex.text.toString()
