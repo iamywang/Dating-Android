@@ -14,9 +14,9 @@
 
     <ImageView
             android:id="@+id/splash_image"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:contentDescription="@string/menu_my"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@string/menu_home"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             app:srcCompat="@drawable/ic_launcher"/>
 

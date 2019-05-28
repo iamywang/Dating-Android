@@ -18,7 +18,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         val id: TextView = findViewById(R.id.register_e1)
         val regdate: TextView = findViewById(R.id.register_e8)
-        val rand = Random(Calendar.MINUTE * Calendar.SECOND)
+        val rand = Random(Calendar.MINUTE + Calendar.SECOND)
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1

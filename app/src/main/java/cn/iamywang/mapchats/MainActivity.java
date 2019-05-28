@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), 1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -81,8 +82,10 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
             TextView id = findViewById(R.id.textView_id);
             TextView nick = findViewById(R.id.textView_name);
             this.USERID = data.getStringExtra("id");
-            id.setText(this.USERID);
-            nick.setText(data.getStringExtra("name"));
+            String tmpid = "ID：" + this.USERID;
+            String tmpname = "昵称：" + data.getStringExtra("name");
+            id.setText(tmpid);
+            nick.setText(tmpname);
         }
     }
 
@@ -95,17 +98,14 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_home) {
-            // Handle the camera action
-            this.startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), 1);
-            item.setVisible(false);
-        } else if (id == R.id.nav_my) {
             Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+            Button loc = findViewById(R.id.map_button);
             intent.putExtra("id", this.USERID);
+            intent.putExtra("loc", loc.getText());
             startActivity(intent);
-        } else if (id == R.id.nav_map) {
-
+        } else if (id == R.id.nav_gps) {
+            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_friends) {
             Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_chat) {
@@ -131,9 +131,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
             setUpMap();
         }
         mSensorHelper = new SensorEventHelper(this);
-        if (mSensorHelper != null) {
-            mSensorHelper.registerSensorListener();
-        }
+        mSensorHelper.registerSensorListener();
     }
 
     /**
@@ -205,8 +203,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
         if (mListener != null && amapLocation != null) {
-            if (amapLocation != null
-                    && amapLocation.getErrorCode() == 0) {
+            if (amapLocation.getErrorCode() == 0) {
                 LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
                 DecimalFormat df = new DecimalFormat("0.000000");
                 this.curLat = location.latitude;

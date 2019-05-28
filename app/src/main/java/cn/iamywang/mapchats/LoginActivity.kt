@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.google.gson.Gson
+import com.alibaba.fastjson.JSON
 import com.ohmerhe.kolley.request.Http
 import java.nio.charset.Charset
+
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,26 +33,10 @@ class LoginActivity : AppCompatActivity() {
             onSuccess { bytes ->
                 // handle data
                 val str = bytes.toString(Charset.defaultCharset())
-                data class A(
-                    val id: Int,
-                    val name: String,
-                    val birth: String,
-                    val sex: String,
-                    val height: Int,
-                    val weight: Int,
-                    val online: String,
-                    val friends: Int,
-                    val reg: String,
-                    val login: String
-                ){
-                    override fun toString(): String {
-                        return this.name
-                    }
-                }
-                val list = Gson().fromJson<A>(str, A::class.java)
+                val list = JSON.parseObject(str)
                 val lintent = intent
                 lintent.putExtra("id", user.text.toString())
-                lintent.putExtra("name", "user")
+                lintent.putExtra("name", list["name"].toString())
                 act.setResult(2, lintent)
                 Toast.makeText(act, "登录成功", Toast.LENGTH_LONG).show()
                 act.finish()

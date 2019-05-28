@@ -2,10 +2,9 @@
     <string name="app_name">GPS地图社交</string>
     <string name="app_author">© iamywang 2019</string>
 
-    <string name="menu_home">登录</string>
-    <string name="menu_my">我的</string>
+    <string name="menu_home">我的</string>
     <string name="menu_map">地图</string>
-    <string name="menu_gps">历史位置</string>
+    <string name="menu_gps">历史轨迹</string>
     <string name="menu_friends">好友</string>
     <string name="menu_chat">聊天</string>
     <string name="menu_share">分享</string>
@@ -24,6 +23,7 @@
     <string name="user_sex">性别</string>
     <string name="user_height">身高</string>
     <string name="user_weight">体重</string>
+    <string name="user_gps">当前位置</string>
     <string name="user_online">在线状态</string>
     <string name="user_regdate">注册时间</string>
 

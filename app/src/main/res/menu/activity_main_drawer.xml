@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+      xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_my"
-            android:icon="@drawable/ic_my"
-            android:title="@string/menu_my" />
-        <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/ic_map"
-            android:title="@string/menu_map" />
-        <item
-                android:id="@+id/nav_gps"
-                android:icon="@drawable/ic_map"
-                android:title="@string/menu_gps" />
-        <item
-            android:id="@+id/nav_friends"
-            android:icon="@drawable/ic_friend"
-            android:title="@string/menu_friends" />
-        <item
-            android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_chat"
-            android:title="@string/menu_chat" />
-    </group>
+    <item android:title="@string/app_name">
+        <menu>
+            <item
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/ic_home"
+                    android:title="@string/menu_home"/>
+            <item
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/ic_map"
+                    android:title="@string/menu_map"/>
+            <item
+                    android:id="@+id/nav_gps"
+                    android:icon="@drawable/ic_map"
+                    android:title="@string/menu_gps"/>
+            <item
+                    android:id="@+id/nav_friends"
+                    android:icon="@drawable/ic_friend"
+                    android:title="@string/menu_friends"/>
+            <item
+                    android:id="@+id/nav_chat"
+                    android:icon="@drawable/ic_chat"
+                    android:title="@string/menu_chat"/>
+        </menu>
+    </item>
 
     <item android:title="@string/menu_about">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="@string/menu_share" />
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_share"
+                    android:title="@string/menu_share"/>
             <item
-                android:id="@+id/nav_feed"
-                android:icon="@drawable/ic_feedback"
-                android:title="@string/menu_feed" />
+                    android:id="@+id/nav_feed"
+                    android:icon="@drawable/ic_feedback"
+                    android:title="@string/menu_feed"/>
             <item
                     android:id="@+id/nav_about"
                     android:icon="@drawable/ic_about"
-                    android:title="@string/menu_about" />
+                    android:title="@string/menu_about"/>
         </menu>
     </item>
 </menu>
