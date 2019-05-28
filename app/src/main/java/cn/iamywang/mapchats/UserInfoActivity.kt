@@ -2,6 +2,7 @@ package cn.iamywang.mapchats
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +16,11 @@ class UserInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
         val infointent = intent
         val infoid = infointent.getStringExtra("id").toString()
         val infoloc = infointent.getStringExtra("loc").toString()
@@ -47,6 +53,14 @@ class UserInfoActivity : AppCompatActivity() {
                 loc.setText(infoloc)
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun Submit(view: View){

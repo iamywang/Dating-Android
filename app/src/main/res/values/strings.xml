@@ -2,13 +2,13 @@
     <string name="app_name">GPS地图社交</string>
     <string name="app_author">© iamywang 2019</string>
 
-    <string name="menu_home">我的</string>
+    <string name="menu_home">我的信息</string>
     <string name="menu_map">地图</string>
     <string name="menu_gps">历史轨迹</string>
-    <string name="menu_friends">好友</string>
-    <string name="menu_chat">聊天</string>
-    <string name="menu_share">分享</string>
-    <string name="menu_feed">反馈</string>
+    <string name="menu_friends">好友列表</string>
+    <string name="menu_chat">聊天室</string>
+    <string name="menu_share">分享应用</string>
+    <string name="menu_feed">问题反馈</string>
     <string name="menu_about">关于</string>
 
     <string name="LogoDes">des</string>
@@ -28,8 +28,12 @@
     <string name="user_regdate">注册时间</string>
 
     <string name="title_activity_login">登录</string>
-    <string name="title_activity_user">我的</string>
+    <string name="title_activity_user">我的信息</string>
     <string name="title_activity_reg">注册</string>
     <string name="title_activity_map">地图</string>
     <string name="title_activity_gps">历史轨迹</string>
+    <string name="title_activity_friend">好友列表</string>
+    <string name="title_activity_chat">聊天室</string>
+    <string name="title_activity_feed">问题反馈</string>
+    <string name="title_activity_about">关于</string>
 </resources>

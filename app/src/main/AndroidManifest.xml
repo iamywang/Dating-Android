@@ -21,12 +21,6 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
-        <activity android:name=".MapDemoActivity"
-                  android:label="@string/title_activity_map"
-                  android:theme="@style/AppTheme">
-        </activity>
-
         <meta-data
                 android:name="com.amap.api.v2.apikey"
                 android:value="d9ca7e6e8b41a18fb6f3171f7d4c4df8"/>
@@ -57,6 +51,35 @@
         <activity
                 android:name=".RegisterActivity"
                 android:label="@string/title_activity_reg"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".AboutActivity"
+                  android:label="@string/title_activity_about"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".FeedBackActivity"
+                  android:label="@string/title_activity_feed"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".HisrotyLocationActivity"
+                  android:label="@string/title_activity_gps"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".FriendsChatActivity"
+                  android:label="@string/title_activity_chat"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".FriendsListActivity"
+                  android:label="@string/title_activity_friend"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".ChatRoomActivity"
+                  android:label="@string/title_activity_chat"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".MapDemoActivity"
+                android:label="@string/title_activity_map"
                 android:theme="@style/AppTheme">
         </activity>
     </application>

@@ -8,13 +8,17 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.KeyEvent
 import android.view.MenuItem
 
 import android.widget.TextView
 import android.widget.Toast
 
+
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var USERID = "1"
+    private var exitTime=System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit()
+            return false
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+    fun exit() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(
+                applicationContext, "再按一次退出程序",
+                Toast.LENGTH_SHORT
+            ).show()
+            exitTime = System.currentTimeMillis()
+        } else {
+            finish()
+            System.exit(0)
+        }
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val id = item.itemId
@@ -57,17 +81,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("id", this.USERID)
             startActivity(intent)
         } else if (id == R.id.nav_gps) {
-            Toast.makeText(this, "功能暂无", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, HisrotyLocationActivity::class.java)
+            startActivity(intent)
         } else if (id == R.id.nav_friends) {
-            Toast.makeText(this, "功能暂无", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, FriendsListActivity::class.java)
+            startActivity(intent)
         } else if (id == R.id.nav_chat) {
-            Toast.makeText(this, "功能暂无", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, ChatRoomActivity::class.java)
+            startActivity(intent)
         } else if (id == R.id.nav_feed) {
-            Toast.makeText(this, "功能暂无", Toast.LENGTH_LONG).show()
-        } else if (id == R.id.nav_about) {
-            Toast.makeText(this, "功能暂无", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, FeedBackActivity::class.java)
+            startActivity(intent)
         } else if (id == R.id.nav_share) {
-            Toast.makeText(this, "功能暂无", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "分享功能正在开发...", Toast.LENGTH_LONG).show()
+        } else if (id == R.id.nav_about) {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
         }
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)

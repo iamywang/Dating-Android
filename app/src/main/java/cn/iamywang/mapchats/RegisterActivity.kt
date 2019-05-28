@@ -3,6 +3,7 @@ package cn.iamywang.mapchats
 import android.icu.util.Calendar
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -16,6 +17,11 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
         val id: TextView = findViewById(R.id.register_e1)
         val regdate: TextView = findViewById(R.id.register_e8)
         val calendar = Calendar.getInstance()
@@ -36,6 +42,14 @@ class RegisterActivity : AppCompatActivity() {
             .append(min).append(":").append(sec)
         id.setText(rand.nextInt(10000).toString())
         regdate.setText(str.toString())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun Submit(view: View) {
