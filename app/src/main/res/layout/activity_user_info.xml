@@ -34,7 +34,7 @@
             <TextView
                     android:text="@string/user_id"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t1"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -51,7 +51,7 @@
             <TextView
                     android:text="@string/user_name"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t2"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -71,7 +71,7 @@
             <TextView
                     android:text="@string/user_sex"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t3"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -91,7 +91,7 @@
             <TextView
                     android:text="@string/user_birth"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t4"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -111,7 +111,7 @@
             <TextView
                     android:text="@string/user_height"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t5"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -128,7 +128,7 @@
             <TextView
                     android:text="cm"
                     android:layout_width="40dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t9"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"/>
@@ -139,7 +139,7 @@
             <TextView
                     android:text="@string/user_weight"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t6"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -156,7 +156,7 @@
             <TextView
                     android:text="kg"
                     android:layout_width="40dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t10"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"/>
@@ -166,7 +166,7 @@
             <TextView
                     android:text="@string/user_gps"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t11"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -183,7 +183,7 @@
             <TextView
                     android:text="@string/user_online"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t7"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -200,7 +200,7 @@
             <TextView
                     android:text="@string/user_regdate"
                     android:layout_width="100dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_t8"
                     android:textAlignment="center" android:textColor="@android:color/black"
                     android:textSize="15sp" android:singleLine="true"/>

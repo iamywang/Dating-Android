@@ -18,8 +18,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         val id: TextView = findViewById(R.id.register_e1)
         val regdate: TextView = findViewById(R.id.register_e8)
-        val rand = Random(Calendar.MINUTE + Calendar.SECOND)
         val calendar = Calendar.getInstance()
+        val rand = Random(Calendar.MINUTE * Calendar.SECOND)
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://10.27.246.15:8000/insertUser/"
+            url = "http://192.168.2.234:8000/insertUser/"
             params {
                 "id" - id.text.toString()
                 "name" - nick.text.toString()

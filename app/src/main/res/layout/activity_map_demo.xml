@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapDemoActivity">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:text="当前位置："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/map_t1"
+                    android:textColor="@android:color/black" android:layout_gravity="center_vertical"
+                    android:textAlignment="center"/>
+            <Button
+                    android:layout_width="100dp"
+                    android:layout_height="40dp" android:id="@+id/map_button"
+                    android:onClick="OnButtonUploadClick"
+                    android:layout_marginStart="8dp" android:text="上传位置"/>
+        </TableRow>
+        <com.amap.api.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        >
+        </com.amap.api.maps.MapView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -3,47 +3,32 @@ package cn.iamywang.mapchats;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.Circle;
-import com.amap.api.maps.model.CircleOptions;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.*;
 
 import java.text.DecimalFormat;
 
-/**
- * 定位图标箭头指向手机朝向
- */
-public class MainActivity extends AppCompatActivity implements LocationSource,
-        AMapLocationListener, NavigationView.OnNavigationItemSelectedListener {
-    private String USERID = "1";
+public class MapDemoActivity extends AppCompatActivity implements LocationSource,
+        AMapLocationListener {
+
     private AMap aMap;
     private MapView mapView;
-    private OnLocationChangedListener mListener;
+    private LocationSource.OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
 
@@ -55,71 +40,31 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "mylocation";
     private double curLat, curLon;
+    private String USERID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        this.startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), 1);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        setContentView(R.layout.activity_map_demo);
+        Intent infointent = getIntent();
+        this.USERID = infointent.getStringExtra("id");
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // 在申请码和返回码都符合的时候，接收返回的数据
-        if (requestCode == 1 && resultCode == 2) {
-            TextView id = findViewById(R.id.textView_id);
-            TextView nick = findViewById(R.id.textView_name);
-            this.USERID = data.getStringExtra("id");
-            String tmpid = "ID：" + this.USERID;
-            String tmpname = "昵称：" + data.getStringExtra("name");
-            id.setText(tmpid);
-            nick.setText(tmpname);
-        }
+        addHisLoc();
     }
 
     public void OnButtonUploadClick(View view) {
-        Toast.makeText(this, "上传成功", Toast.LENGTH_LONG).show();
+        DecimalFormat df = new DecimalFormat("0.000000");
+        String loc = df.format(this.curLat) + "," + df.format(this.curLon);
+        JavaHttpKolley jhk = new JavaHttpKolley();
+        jhk.addLocation(this.USERID, loc, this);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id == R.id.nav_home) {
-            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
-            Button loc = findViewById(R.id.map_button);
-            intent.putExtra("id", this.USERID);
-            intent.putExtra("loc", loc.getText());
-            startActivity(intent);
-        } else if (id == R.id.nav_gps) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_friends) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_chat) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_feed) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_about) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this, "功能暂无", Toast.LENGTH_LONG).show();
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    public void addHisLoc() {
+        JavaHttpKolley jhk = new JavaHttpKolley();
+        jhk.getAllLocations(this.USERID, this);
     }
 
     /**
@@ -208,8 +153,8 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
                 DecimalFormat df = new DecimalFormat("0.000000");
                 this.curLat = location.latitude;
                 this.curLon = location.longitude;
-                Button loc = findViewById(R.id.map_button);
-                String res = "" + df.format(this.curLat) + "," + df.format(this.curLon);
+                TextView loc = findViewById(R.id.map_t1);
+                String res = "当前位置：" + df.format(this.curLat) + "," + df.format(this.curLon);
                 loc.setText(res);
                 if (!mFirstFix) {
                     mFirstFix = true;
@@ -223,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
                     mLocMarker.setPosition(location);
                     aMap.moveCamera(CameraUpdateFactory.changeLatLng(location));
                 }
+                mlocationClient.stopLocation();
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);
@@ -234,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
      * 激活定位
      */
     @Override
-    public void activate(OnLocationChangedListener listener) {
+    public void activate(LocationSource.OnLocationChangedListener listener) {
         mListener = listener;
         if (mlocationClient == null) {
             mlocationClient = new AMapLocationClient(this);
@@ -242,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
             //设置定位监听
             mlocationClient.setLocationListener(this);
             //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationMode.Hight_Accuracy);
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
             //设置定位参数
             mlocationClient.setLocationOption(mLocationOption);
             // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
@@ -289,4 +235,13 @@ public class MainActivity extends AppCompatActivity implements LocationSource,
         mLocMarker.setTitle(LOCATION_MARKER_FLAG);
     }
 
+    public void addLocText(LatLng latlng, String time) {
+        MarkerOptions options = new MarkerOptions();
+        options.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
+                R.mipmap.point)));
+        options.title(time);
+        options.anchor(0.5f, 0.5f);
+        options.position(latlng);
+        aMap.addMarker(options);
+    }
 }

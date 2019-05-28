@@ -28,6 +28,8 @@
     <string name="user_regdate">注册时间</string>
 
     <string name="title_activity_login">登录</string>
-    <string name="title_activity_user">个人信息</string>
+    <string name="title_activity_user">我的</string>
     <string name="title_activity_reg">注册</string>
+    <string name="title_activity_map">地图</string>
+    <string name="title_activity_gps">历史轨迹</string>
 </resources>
