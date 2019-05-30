@@ -246,5 +246,6 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         options.anchor(0.5f, 0.5f);
         options.position(latlng);
         options.title(str);
+        aMap.addMarker(options);
     }
 }

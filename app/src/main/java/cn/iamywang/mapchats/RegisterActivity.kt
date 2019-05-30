@@ -25,7 +25,6 @@ class RegisterActivity : AppCompatActivity() {
         val id: TextView = findViewById(R.id.register_e1)
         val regdate: TextView = findViewById(R.id.register_e8)
         val calendar = Calendar.getInstance()
-        val rand = Random(Calendar.MINUTE * Calendar.SECOND)
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -37,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         val hou = String.format("%0" + 2 + "d", hour)
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
+        val rand = Random(Calendar.MINUTE * Calendar.SECOND)
         val str = StringBuffer("")
         str.append(year).append(".").append(mon).append(".").append(days).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)

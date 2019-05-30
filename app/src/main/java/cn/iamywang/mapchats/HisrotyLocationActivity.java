@@ -36,9 +36,11 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     private SensorEventHelper mSensorHelper;
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "当前位置";
+
     private String USERID = "1";
     private Random rand = new Random();
     private int roadIndex = rand.nextInt(1000);
+    private Double lat,lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +152,9 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         if (mListener != null && amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
+                this.lat = location.latitude;
+                this.lon = location.longitude;
+                addCurLine(location);
                 if (!mFirstFix) {
                     mFirstFix = true;
                     addCircle(location, amapLocation.getAccuracy());//添加定位精度圆
@@ -162,13 +167,6 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
                     mLocMarker.setPosition(location);
                     aMap.moveCamera(CameraUpdateFactory.changeLatLng(location));
                 }
-                DecimalFormat df = new DecimalFormat("0.000000");
-                Double lat = location.latitude;
-                Double lon = location.longitude;
-                String loc = df.format(lat) + "," + df.format(lon);
-                JavaHttpKolley jhk = new JavaHttpKolley();
-                jhk.addCurLine(this.USERID, "" + this.roadIndex, loc, this);
-                addCurLine(location);
             }
         }
     }
@@ -233,7 +231,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     }
 
 
-    public void addLocLine(List<LatLng> list) {
+    public void addHisLine(List<LatLng> list) {
         PolylineOptions options = new PolylineOptions();
         options.addAll(list);
         options.width(10);
@@ -255,5 +253,9 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
             options.color(Color.argb(255, 70, 128, 128));
             mLocPoly = aMap.addPolyline(options);
         }
+        DecimalFormat df = new DecimalFormat("0.000000");
+        String loc = df.format(this.lat) + "," + df.format(this.lon);
+        JavaHttpKolley jhk = new JavaHttpKolley();
+        jhk.addCurLine(this.USERID, "" + this.roadIndex, loc);
     }
 }

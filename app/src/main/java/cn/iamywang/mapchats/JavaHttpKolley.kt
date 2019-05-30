@@ -1,6 +1,7 @@
 package cn.iamywang.mapchats
 
 import android.icu.util.Calendar
+import android.util.Log
 import android.widget.Toast
 import com.alibaba.fastjson.JSON
 import com.amap.api.maps.model.LatLng
@@ -40,7 +41,7 @@ class JavaHttpKolley {
     }
 
     fun getHisMarker(id: String, act: MapDemoActivity) {
-        var res = ""
+        var res:String
         Http.post {
             url = "http://10.27.246.15/getAllLocations/"
             params {
@@ -50,14 +51,16 @@ class JavaHttpKolley {
                 // handle data
                 res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
+                var index:Int
                 for (i in array.indices) {
-                    val index = array.getJSONObject(i).getString("road")
-                    if (index == "0") {
+                    index = array.getJSONObject(i).getString("road").toInt()
+                    if (index == 0) {
                         val lloc = array.getJSONObject(i).getString("location")
+                        val str = array.getJSONObject(i).getString("time")
                         val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                         val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
                         val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
-                        act.addHisLoc(l, array.getJSONObject(i).getString("time"));
+                        act.addHisLoc(l, str);
                     }
                 }
             }
@@ -65,7 +68,7 @@ class JavaHttpKolley {
     }
 
     fun getHisLine(id: String, act: HisrotyLocationActivity) {
-        var res = ""
+        var res:String
         Http.post {
             url = "http://10.27.246.15/getAllLocations/"
             params {
@@ -76,9 +79,10 @@ class JavaHttpKolley {
                 res = bytes.toString(Charset.defaultCharset())
                 val latlngList = ArrayList<LatLng>()
                 val array = JSON.parseArray(res)
+                var index:Int
                 for (i in array.indices) {
-                    val index = array.getJSONObject(i).getString("road")
-                    if (index != "0") {
+                    index = array.getJSONObject(i).getString("road").toInt()
+                    if (index != 0) {
                         val lloc = array.getJSONObject(i).getString("location")
                         val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                         val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
@@ -86,12 +90,12 @@ class JavaHttpKolley {
                         latlngList.add(l)
                     }
                 }
-                act.addLocLine(latlngList)
+                act.addHisLine(latlngList)
             }
         }
     }
 
-    fun addCurLine(userid: String, index: String, loc: String, act: HisrotyLocationActivity) {
+    fun addCurLine(userid: String, index: String, loc: String) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
@@ -114,7 +118,7 @@ class JavaHttpKolley {
                 "time" - str.toString()
                 "location" - loc
             }
-            onSuccess { bytes ->
+            onSuccess {
 
             }
         }
