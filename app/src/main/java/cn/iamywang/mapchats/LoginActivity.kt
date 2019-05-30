@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://192.168.2.234:8000/login/"
+            url = "http://10.27.246.15/login/"
             params {
                 "id" - user.text.toString()
                 "password" - pswd.text.toString()

@@ -26,7 +26,7 @@ class UserInfoActivity : AppCompatActivity() {
         val infoloc = infointent.getStringExtra("loc").toString()
         Http.init(this)
         Http.post {
-            url = "http://192.168.2.234:8000/getUserInfo/"
+            url = "http://10.27.246.15/getUserInfo/"
             params {
                 "id" - infoid
             }
@@ -74,7 +74,7 @@ class UserInfoActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://192.168.2.234:8000/updateUser/"
+            url = "http://10.27.246.15/updateUser/"
             params{
                 "id" - id.text.toString()
                 "name" - nick.text.toString()

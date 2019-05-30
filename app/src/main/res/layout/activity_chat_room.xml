@@ -6,5 +6,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ChatRoomActivity">
-
+    <TableRow
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" android:background="#EEEEEE">
+        <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:ems="10"
+                android:id="@+id/fchat_e1"/>
+        <Button
+                android:text=">"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/fchat_b1"/>
+    </TableRow>
 </android.support.constraint.ConstraintLayout>

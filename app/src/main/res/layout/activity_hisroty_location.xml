@@ -7,4 +7,30 @@
         android:layout_height="match_parent"
         tools:context=".HisrotyLocationActivity">
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        >
+
+            <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="轨迹记录"/>
+
+            <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史轨迹"/>
+
+        </android.support.design.widget.TabLayout>
+        <com.amap.api.maps.MapView
+                android:id="@+id/his_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://192.168.2.234:8000/insertUser/"
+            url = "http://10.27.246.15/insertUser/"
             params {
                 "id" - id.text.toString()
                 "name" - nick.text.toString()

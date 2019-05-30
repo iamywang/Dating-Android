@@ -5,13 +5,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -39,7 +35,7 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
     private Marker mLocMarker;
     private SensorEventHelper mSensorHelper;
     private Circle mCircle;
-    public static final String LOCATION_MARKER_FLAG = "mylocation";
+    public static final String LOCATION_MARKER_FLAG = "当前位置";
     private double curLat, curLon;
     private String USERID;
 
@@ -49,7 +45,7 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_demo);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
+        if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -58,15 +54,15 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
-        addHisLoc();
+        JavaHttpKolley jkh = new JavaHttpKolley();
+        jkh.getHisMarker(this.USERID, this);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -76,11 +72,6 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         String loc = df.format(this.curLat) + "," + df.format(this.curLon);
         JavaHttpKolley jhk = new JavaHttpKolley();
         jhk.addLocation(this.USERID, loc, this);
-    }
-
-    public void addHisLoc() {
-        JavaHttpKolley jhk = new JavaHttpKolley();
-        jhk.getAllLocations(this.USERID, this);
     }
 
     /**
@@ -185,9 +176,6 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
                     aMap.moveCamera(CameraUpdateFactory.changeLatLng(location));
                 }
                 mlocationClient.stopLocation();
-            } else {
-                String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
             }
         }
     }
@@ -251,13 +239,12 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         mLocMarker.setTitle(LOCATION_MARKER_FLAG);
     }
 
-    public void addLocText(LatLng latlng, String time) {
+    public void addHisLoc(LatLng latlng, String str) {
         MarkerOptions options = new MarkerOptions();
         options.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
                 R.mipmap.point)));
-        options.title(time);
         options.anchor(0.5f, 0.5f);
         options.position(latlng);
-        aMap.addMarker(options);
+        options.title(str);
     }
-    }
+}

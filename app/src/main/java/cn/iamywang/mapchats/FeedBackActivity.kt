@@ -3,6 +3,8 @@ package cn.iamywang.mapchats
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 
 class FeedBackActivity : AppCompatActivity() {
 
@@ -22,5 +24,11 @@ class FeedBackActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun OnButtonClick(view: View){
+        this.finish()
+        Toast.makeText(this, "反馈成功", Toast.LENGTH_LONG).show()
+
     }
 }

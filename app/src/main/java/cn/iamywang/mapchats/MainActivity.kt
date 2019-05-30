@@ -82,15 +82,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         } else if (id == R.id.nav_gps) {
             val intent = Intent(this, HisrotyLocationActivity::class.java)
+            intent.putExtra("id", this.USERID)
             startActivity(intent)
         } else if (id == R.id.nav_friends) {
             val intent = Intent(this, FriendsListActivity::class.java)
+            intent.putExtra("id", this.USERID)
             startActivity(intent)
         } else if (id == R.id.nav_chat) {
             val intent = Intent(this, ChatRoomActivity::class.java)
             startActivity(intent)
         } else if (id == R.id.nav_feed) {
             val intent = Intent(this, FeedBackActivity::class.java)
+            intent.putExtra("id", this.USERID)
             startActivity(intent)
         } else if (id == R.id.nav_share) {
             Toast.makeText(this, "分享功能正在开发...", Toast.LENGTH_LONG).show()
