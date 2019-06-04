@@ -17,6 +17,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.*;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,7 +41,8 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     private String USERID = "1";
     private Random rand = new Random();
     private int roadIndex = rand.nextInt(1000);
-    private Double lat,lon;
+    private Boolean roadBool = true;
+    private Double lat, lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +55,13 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         }
         Intent infointent = getIntent();
         this.USERID = infointent.getStringExtra("id");
+
         mapView = (MapView) findViewById(R.id.his_map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
+
         JavaHttpKolley jhk = new JavaHttpKolley();
-        jhk.getHisLine(this.USERID, this);
+        jhk.getHisRoadList(this.USERID, this);
     }
 
     @Override
@@ -68,7 +72,6 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         }
         return super.onOptionsItemSelected(item);
     }
-
     /**
      * 初始化
      */
@@ -231,11 +234,11 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     }
 
 
-    public void addHisLine(List<LatLng> list) {
+    public void addHisLine(List<LatLng> list,int color) {
         PolylineOptions options = new PolylineOptions();
         options.addAll(list);
         options.width(10);
-        options.color(Color.argb(255, 80, 80, 80));
+        options.color(color);
         aMap.addPolyline(options);
     }
 
@@ -257,5 +260,9 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         String loc = df.format(this.lat) + "," + df.format(this.lon);
         JavaHttpKolley jhk = new JavaHttpKolley();
         jhk.addCurLine(this.USERID, "" + this.roadIndex, loc);
+        if (this.roadBool) {
+            jhk.addRoad(this.USERID, "" + this.roadIndex);
+            this.roadBool = false;
+        }
     }
 }

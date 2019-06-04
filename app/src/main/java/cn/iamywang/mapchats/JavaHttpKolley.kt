@@ -1,13 +1,14 @@
 package cn.iamywang.mapchats
 
+import android.graphics.Color
 import android.icu.util.Calendar
-import android.util.Log
 import android.widget.Toast
 import com.alibaba.fastjson.JSON
 import com.amap.api.maps.model.LatLng
 import com.ohmerhe.kolley.request.Http
 import java.lang.Double
 import java.nio.charset.Charset
+import kotlin.random.Random
 
 class JavaHttpKolley {
     fun addLocation(id: String, loc: String, act: MapDemoActivity) {
@@ -41,7 +42,7 @@ class JavaHttpKolley {
     }
 
     fun getHisMarker(id: String, act: MapDemoActivity) {
-        var res:String
+        var res: String
         Http.post {
             url = "http://10.27.246.15/getAllLocations/"
             params {
@@ -51,7 +52,7 @@ class JavaHttpKolley {
                 // handle data
                 res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
-                var index:Int
+                var index: Int
                 for (i in array.indices) {
                     index = array.getJSONObject(i).getString("road").toInt()
                     if (index == 0) {
@@ -67,30 +68,88 @@ class JavaHttpKolley {
         }
     }
 
-    fun getHisLine(id: String, act: HisrotyLocationActivity) {
-        var res:String
+    fun getOnlineUser(id: String, act: MapDemoActivity) {
+        var res: String
         Http.post {
-            url = "http://10.27.246.15/getAllLocations/"
+            url = "http://10.27.246.15/getOnlineLocations/"
             params {
                 "id" - id
             }
             onSuccess { bytes ->
                 // handle data
                 res = bytes.toString(Charset.defaultCharset())
-                val latlngList = ArrayList<LatLng>()
                 val array = JSON.parseArray(res)
-                var index:Int
+                var index: Int
                 for (i in array.indices) {
                     index = array.getJSONObject(i).getString("road").toInt()
-                    if (index != 0) {
+                    if (index == 0) {
                         val lloc = array.getJSONObject(i).getString("location")
+                        val str = array.getJSONObject(i).getString("time")
                         val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                         val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
                         val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
-                        latlngList.add(l)
+                        act.addShareLoc(l, str);
                     }
                 }
-                act.addHisLine(latlngList)
+            }
+        }
+    }
+
+    fun getHisRoadList(id: String, act: HisrotyLocationActivity) {
+        val list = ArrayList<String>()
+        Http.post {
+            url = "http://10.27.246.15/getHistoryRoadList/"
+            params {
+                "id" - id
+            }
+            onSuccess { bytes ->
+                val res = bytes.toString(Charset.defaultCharset())
+                val array = JSON.parseArray(res)
+                for (i in array.indices) {
+                    val road = array.getJSONObject(i).getString("road")
+                    list.add(road)
+                    getHisLine(id, road, act)
+                }
+            }
+        }
+    }
+
+    fun getHisLine(id: String, road: String, act: HisrotyLocationActivity) {
+        var res: String
+        Http.post {
+            url = "http://10.27.246.15/getHistoryRoad/"
+            params {
+                "id" - id
+                "road" - road
+            }
+            onSuccess { bytes ->
+                // handle data
+                res = bytes.toString(Charset.defaultCharset())
+                val latlngList = ArrayList<LatLng>()
+                val array = JSON.parseArray(res)
+                for (i in array.indices) {
+                    val lloc = array.getJSONObject(i).getString("location")
+                    val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+                    val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                    val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
+                    latlngList.add(l)
+                }
+                val rand = Random(road.toInt())
+                val color = Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255))
+                act.addHisLine(latlngList, color)
+            }
+        }
+    }
+
+    fun addRoad(id: String, index: String) {
+        Http.post {
+            url = "http://10.27.246.15/addRoad/"
+            params {
+                "id" - id
+                "road" - index
+            }
+            onSuccess {
+
             }
         }
     }
@@ -103,12 +162,11 @@ class JavaHttpKolley {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
         val second = calendar.get(Calendar.SECOND)
-        val days = String.format("%0" + 2 + "d", day)
         val hou = String.format("%0" + 2 + "d", hour)
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append(".").append(month).append(".").append(days).append(" ").append(hou).append(":")
+        str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
             url = "http://10.27.246.15/addLocation/"

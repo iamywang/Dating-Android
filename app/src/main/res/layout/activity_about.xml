@@ -7,20 +7,31 @@
         android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
-            android:layout_height="192dp"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent">
-        <android.support.design.widget.CollapsingToolbarLayout
+        <android.support.v7.widget.Toolbar
+                android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:toolbarId="@+id/toolbar"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-                app:contentScrim="?attr/colorPrimary">
-            <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_width="match_parent">
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.CollapsingToolbarLayout>
+                app:layout_scrollFlags="scroll|enterAlways">
+        </android.support.v7.widget.Toolbar>
+        <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable">
+            <android.support.design.widget.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Tab1"/>
+            <android.support.design.widget.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Tab2"/>
+            <android.support.design.widget.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Tab3"/>
+        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -29,8 +40,13 @@
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".AboutActivity">
-
-        </android.support.constraint.ConstraintLayout>
+                tools:context=".AboutActivity"/>
     </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@android:drawable/ic_input_add"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:clickable="true"/>
 </android.support.design.widget.CoordinatorLayout>

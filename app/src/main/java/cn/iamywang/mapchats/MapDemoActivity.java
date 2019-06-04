@@ -39,7 +39,6 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
     private double curLat, curLon;
     private String USERID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,7 +174,6 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
                     mLocMarker.setPosition(location);
                     aMap.moveCamera(CameraUpdateFactory.changeLatLng(location));
                 }
-                mlocationClient.stopLocation();
             }
         }
     }
@@ -194,6 +192,7 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
             //设置为高精度定位模式
             mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
             //设置定位参数
+            mLocationOption.setInterval(10000);
             mlocationClient.setLocationOption(mLocationOption);
             // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
             // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
@@ -243,6 +242,16 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         MarkerOptions options = new MarkerOptions();
         options.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
                 R.mipmap.point)));
+        options.anchor(0.5f, 0.5f);
+        options.position(latlng);
+        options.title(str);
+        aMap.addMarker(options);
+    }
+
+    public void addShareLoc(LatLng latlng, String str) {
+        MarkerOptions options = new MarkerOptions();
+        options.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
+                R.mipmap.navi_map_gps_locked)));
         options.anchor(0.5f, 0.5f);
         options.position(latlng);
         options.title(str);
