@@ -12,7 +12,7 @@ import com.ohmerhe.kolley.request.Http
 import java.nio.charset.Charset
 
 class UserInfoActivity : AppCompatActivity() {
-
+    val root = "http://192.168.43.241"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
@@ -26,7 +26,7 @@ class UserInfoActivity : AppCompatActivity() {
         val infoloc = infointent.getStringExtra("loc").toString()
         Http.init(this)
         Http.post {
-            url = "http://10.27.246.15/getUserInfo/"
+            url = root + "/getUserInfo/"
             params {
                 "id" - infoid
             }
@@ -74,7 +74,7 @@ class UserInfoActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://10.27.246.15/updateUser/"
+            url =root + "/updateUser/"
             params{
                 "id" - id.text.toString()
                 "name" - nick.text.toString()

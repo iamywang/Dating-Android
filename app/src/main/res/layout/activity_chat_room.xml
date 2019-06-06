@@ -6,23 +6,71 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ChatRoomActivity">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tableRow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"/>
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button3"/>
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button4"/>
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button5"/>
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button6"/>
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button7"/>
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button8"/>
+        </LinearLayout>
+    </ScrollView>
     <TableRow
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="44dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" android:background="#EEEEEE">
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="#EFEFEF" android:id="@+id/tableRow">
         <EditText
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="34dp"
                 android:inputType="textPersonName"
-                android:text="Name"
                 android:ems="10"
-                android:id="@+id/fchat_e1"/>
+                android:id="@+id/fchat_e1" android:background="@android:color/white" android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" android:layout_gravity="center_vertical" android:textSize="15sp"/>
         <Button
-                android:text=">"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/fchat_b1"/>
+                android:text="发送"
+                android:layout_width="match_parent"
+                android:layout_height="34dp" android:id="@+id/fchat_b1"
+                android:background="@color/design_default_color_primary_dark"
+                android:layout_gravity="center_horizontal|center_vertical" android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" android:textColor="@android:color/white"/>
     </TableRow>
 </android.support.constraint.ConstraintLayout>

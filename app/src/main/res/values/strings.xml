@@ -5,6 +5,7 @@
     <string name="menu_home">我的信息</string>
     <string name="menu_map">地图</string>
     <string name="menu_gps">历史轨迹</string>
+    <string name="menu_path">轨迹记录</string>
     <string name="menu_friends">好友列表</string>
     <string name="menu_chat">聊天室</string>
     <string name="menu_share">分享应用</string>
@@ -32,11 +33,10 @@
     <string name="title_activity_reg">注册</string>
     <string name="title_activity_map">地图</string>
     <string name="title_activity_gps">历史轨迹</string>
+    <string name="title_activity_path">轨迹记录</string>
     <string name="title_activity_friend">好友列表</string>
     <string name="title_activity_chat">聊天室</string>
     <string name="title_activity_feed">问题反馈</string>
     <string name="title_activity_about">关于</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

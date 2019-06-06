@@ -3,6 +3,7 @@ package cn.iamywang.mapchats;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,16 +11,12 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
+import com.amap.api.maps.*;
 import com.amap.api.maps.model.*;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HisrotyLocationActivity extends AppCompatActivity implements LocationSource,
         AMapLocationListener {
@@ -33,16 +30,11 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
     private boolean mFirstFix = false;
     private Marker mLocMarker;
-    private Polyline mLocPoly;
     private SensorEventHelper mSensorHelper;
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "当前位置";
 
     private String USERID = "1";
-    private Random rand = new Random();
-    private int roadIndex = rand.nextInt(1000);
-    private Boolean roadBool = true;
-    private Double lat, lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +51,6 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         mapView = (MapView) findViewById(R.id.his_map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
-
         JavaHttpKolley jhk = new JavaHttpKolley();
         jhk.getHisRoadList(this.USERID, this);
     }
@@ -72,6 +63,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * 初始化
      */
@@ -88,11 +80,17 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
      * 设置一些amap的属性
      */
     private void setUpMap() {
+        UiSettings uiSettings = aMap.getUiSettings();
+        uiSettings.setCompassEnabled(true);// 设置指南针是否显示
+        uiSettings.setZoomControlsEnabled(true);// 设置缩放按钮是否显示
+        uiSettings.setScaleControlsEnabled(true);// 设置比例尺是否显示
+        uiSettings.setRotateGesturesEnabled(true);// 设置地图旋转是否可用
+        uiSettings.setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+//        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6507007,117.1140042),11));
     }
 
     /**
@@ -155,15 +153,12 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         if (mListener != null && amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
-                this.lat = location.latitude;
-                this.lon = location.longitude;
-                addCurLine(location);
                 if (!mFirstFix) {
                     mFirstFix = true;
                     addCircle(location, amapLocation.getAccuracy());//添加定位精度圆
                     addMarker(location);//添加定位图标
                     mSensorHelper.setCurrentMarker(mLocMarker);//定位图标旋转
-                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
+                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
                 } else {
                     mCircle.setCenter(location);
                     mCircle.setRadius(amapLocation.getAccuracy());
@@ -189,6 +184,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
             mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
             //设置定位参数
             mlocationClient.setLocationOption(mLocationOption);
+            mLocationOption.setInterval(100000);
             // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
             // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
             // 在定位结束后，在合适的生命周期调用onDestroy()方法
@@ -234,35 +230,51 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     }
 
 
-    public void addHisLine(List<LatLng> list,int color) {
+    public void addHisLine(List<LatLng> list, int color) {
         PolylineOptions options = new PolylineOptions();
         options.addAll(list);
-        options.width(10);
+        options.width(15);
         options.color(color);
+        options.lineJoinType(PolylineOptions.LineJoinType.LineJoinRound);
+        options.lineCapType(PolylineOptions.LineCapType.LineCapRound);
+        options.setDottedLine(true);
+        aMap.addMarker(new MarkerOptions().position(list.get(0)).title("起点").snippet("起点"));
         aMap.addPolyline(options);
-    }
 
-    public void addCurLine(LatLng l) {
-        if (mLocPoly != null) {
-            PolylineOptions options = mLocPoly.getOptions();
-            options.add(l);
-            options.width(10);
-            options.color(Color.argb(255, 70, 128, 128));
-            mLocPoly = aMap.addPolyline(options);
-        } else {
-            PolylineOptions options = new PolylineOptions();
-            options.add(l);
-            options.width(10);
-            options.color(Color.argb(255, 70, 128, 128));
-            mLocPoly = aMap.addPolyline(options);
+        MarkerOptions pathMarkerOptions = new MarkerOptions();
+        pathMarkerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
+                R.mipmap.run)));
+        pathMarkerOptions.anchor(0.5f, 0.5f);
+        pathMarkerOptions.position(list.get(0));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 16));
+        Marker pathMarker = aMap.addMarker(pathMarkerOptions);
+
+        class PathReviewThread extends Thread {
+            private Marker pathMarker;
+            private List<LatLng> list;
+
+            private PathReviewThread(List<LatLng> list, Marker pathMarker) {
+                this.list = list;
+                this.pathMarker = pathMarker;
+            }
+
+            @Override
+            public void run() {
+                try {
+                    for (int i = 1; i < list.size(); i++) {
+                        Thread.sleep(300);
+                        pathMarker.setPosition(list.get(i));
+                        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(i), 16));
+                    }
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                pathMarker.remove();
+            }
         }
-        DecimalFormat df = new DecimalFormat("0.000000");
-        String loc = df.format(this.lat) + "," + df.format(this.lon);
-        JavaHttpKolley jhk = new JavaHttpKolley();
-        jhk.addCurLine(this.USERID, "" + this.roadIndex, loc);
-        if (this.roadBool) {
-            jhk.addRoad(this.USERID, "" + this.roadIndex);
-            this.roadBool = false;
-        }
+        PathReviewThread t = new PathReviewThread(list, pathMarker);
+        t.start();
+        aMap.addMarker(new MarkerOptions().position(list.get(list.size() - 1)).title("终点").snippet("终点"));
     }
 }

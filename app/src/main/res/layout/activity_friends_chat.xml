@@ -13,17 +13,18 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" android:background="#EEEEEE">
+            android:layout_marginEnd="8dp" android:background="#EFEFEF">
         <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="280dp"
+                android:layout_height="34dp"
                 android:inputType="textPersonName"
-                android:text="Name"
                 android:ems="10"
-                android:id="@+id/fchat_e1"/>
+                android:id="@+id/fchat_e1" android:background="@android:color/white" android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" android:layout_gravity="center_vertical"/>
         <Button
-                android:text=">"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/fchat_b1"/>
+                android:text="发送"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/fchat_b1"
+                android:background="@android:color/white"/>
     </TableRow>
 </android.support.constraint.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -16,10 +17,10 @@ import com.amap.api.maps.*;
 import com.amap.api.maps.model.*;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
-public class MapDemoActivity extends AppCompatActivity implements LocationSource,
+public class PathRecordActivity extends AppCompatActivity implements LocationSource,
         AMapLocationListener {
-
     private AMap aMap;
     private MapView mapView;
     private LocationSource.OnLocationChangedListener mListener;
@@ -30,16 +31,22 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
     private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
     private boolean mFirstFix = false;
     private Marker mLocMarker;
+    private Polyline mLocPoly;
     private SensorEventHelper mSensorHelper;
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "当前位置";
-    private double curLat, curLon;
-    private String USERID;
+
+    private String USERID = "1";
+    private Random rand = new Random();
+    private int roadIndex = rand.nextInt(1000);
+    private Boolean roadBool = true;
+    private Boolean enbableAddPath = false;
+    private Double lat, lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_demo);
+        setContentView(R.layout.activity_path_record);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
@@ -47,12 +54,10 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         }
         Intent infointent = getIntent();
         this.USERID = infointent.getStringExtra("id");
-        mapView = (MapView) findViewById(R.id.map);
+
+        mapView = (MapView) findViewById(R.id.record_map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
-        JavaHttpKolley jkh = new JavaHttpKolley();
-        jkh.getHisMarker(this.USERID, this);
-        jkh.getOnlineUser(this.USERID, this);
     }
 
     @Override
@@ -64,11 +69,31 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         return super.onOptionsItemSelected(item);
     }
 
-    public void OnButtonUploadClick(View view) {
-        DecimalFormat df = new DecimalFormat("0.000000");
-        String loc = df.format(this.curLat) + "," + df.format(this.curLon);
-        JavaHttpKolley jhk = new JavaHttpKolley();
-        jhk.addLocation(this.USERID, loc, this);
+    public void onButtonClick(View view) {
+        Button button = findViewById(R.id.record_button);
+        if(this.enbableAddPath){
+            this.enbableAddPath = false;
+            button.setText("开始");
+            mLocationOption.setInterval(1000);
+            mlocationClient.startLocation();
+            final long starttime = System.currentTimeMillis();
+            class TimeRecordThread extends Thread {
+
+                @Override
+                public void run() {
+                    long time = (System.currentTimeMillis() - starttime) / 1000;
+                    TextView timer_text = findViewById(R.id.record_t2);
+                    DecimalFormat df = new DecimalFormat("00");
+                    String tmp = df.format(time / 60) + ":" + df.format(time - (time / 60) * 60);
+                    timer_text.setText(tmp);
+                }
+            }
+            TimeRecordThread recordThread = new TimeRecordThread();
+            recordThread.start();
+        } else {
+            this.enbableAddPath = true;
+            button.setText("停止");
+        }
     }
 
     /**
@@ -97,7 +122,7 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6507007,117.1140042),11));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6507007, 117.1140042), 11));
     }
 
     /**
@@ -160,12 +185,11 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         if (mListener != null && amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
-                DecimalFormat df = new DecimalFormat("0.000000");
-                this.curLat = location.latitude;
-                this.curLon = location.longitude;
-                TextView loc = findViewById(R.id.map_t1);
-                String res = "当前位置：" + df.format(this.curLat) + "," + df.format(this.curLon);
-                loc.setText(res);
+                if (enbableAddPath) {
+                    this.lat = location.latitude;
+                    this.lon = location.longitude;
+                    addCurLine(location);
+                }
                 if (!mFirstFix) {
                     mFirstFix = true;
                     addCircle(location, amapLocation.getAccuracy());//添加定位精度圆
@@ -196,8 +220,8 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
             //设置为高精度定位模式
             mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
             //设置定位参数
-            mLocationOption.setInterval(10000);
             mlocationClient.setLocationOption(mLocationOption);
+            mLocationOption.setInterval(10000);
             // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
             // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
             // 在定位结束后，在合适的生命周期调用onDestroy()方法
@@ -242,24 +266,30 @@ public class MapDemoActivity extends AppCompatActivity implements LocationSource
         mLocMarker.setTitle(LOCATION_MARKER_FLAG);
     }
 
-    public void addHisLoc(LatLng latlng, String uid, String time) {
-        MarkerOptions options = new MarkerOptions();
-        options.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
-                R.mipmap.point)));
-        options.anchor(0.5f, 0.5f);
-        options.title(uid);
-        options.snippet(time);
-        aMap.addMarker(options);
-    }
+    public void addCurLine(LatLng l) {
+        PolylineOptions options;
+        if (mLocPoly != null) {
+            options = mLocPoly.getOptions();
+//            mLocPoly.remove();
+        } else {
+            options = new PolylineOptions();
+            aMap.addMarker(new MarkerOptions().position(l).title("起点").snippet("起点"));
+        }
+        options.add(l);
+        options.width(15);
+        options.color(Color.argb(255, 0, 128, 255));
+        options.lineJoinType(PolylineOptions.LineJoinType.LineJoinRound);
+        options.lineCapType(PolylineOptions.LineCapType.LineCapRound);
+        mLocPoly = aMap.addPolyline(options);
 
-    public void addShareLoc(LatLng latlng, String uid, String time) {
-        MarkerOptions options = new MarkerOptions();
-        options.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
-                R.mipmap.run)));
-        options.anchor(0.5f, 0.5f);
-        options.position(latlng);
-        options.title(uid);
-        options.snippet(time);
-        aMap.addMarker(options);
+        DecimalFormat df = new DecimalFormat("0.000000");
+        String loc = df.format(this.lat) + "," + df.format(this.lon);
+
+        JavaHttpKolley jhk = new JavaHttpKolley();
+        jhk.addCurLine(this.USERID, "" + this.roadIndex, loc);
+        if (this.roadBool) {
+            jhk.addRoad(this.USERID, "" + this.roadIndex);
+            this.roadBool = false;
+        }
     }
 }

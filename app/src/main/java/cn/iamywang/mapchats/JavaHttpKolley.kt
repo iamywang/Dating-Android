@@ -11,6 +11,7 @@ import java.nio.charset.Charset
 import kotlin.random.Random
 
 class JavaHttpKolley {
+    val root = "http://192.168.43.241"
     fun addLocation(id: String, loc: String, act: MapDemoActivity) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -27,7 +28,7 @@ class JavaHttpKolley {
         str.append(year).append(".").append(month).append(".").append(days).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
-            url = "http://10.27.246.15/addLocation/"
+            url = root + "/addLocation/"
             params {
                 "id" - id
                 "road" - "0"
@@ -44,9 +45,9 @@ class JavaHttpKolley {
     fun getHisMarker(id: String, act: MapDemoActivity) {
         var res: String
         Http.post {
-            url = "http://10.27.246.15/getAllLocations/"
+            url = root + "/getLocations/"
             params {
-                "id" - id
+                "key" - id
             }
             onSuccess { bytes ->
                 // handle data
@@ -58,10 +59,11 @@ class JavaHttpKolley {
                     if (index == 0) {
                         val lloc = array.getJSONObject(i).getString("location")
                         val str = array.getJSONObject(i).getString("time")
+                        val uid = "ID：" + id
                         val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                         val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
                         val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
-                        act.addHisLoc(l, str);
+                        act.addHisLoc(l, uid, str);
                     }
                 }
             }
@@ -71,25 +73,22 @@ class JavaHttpKolley {
     fun getOnlineUser(id: String, act: MapDemoActivity) {
         var res: String
         Http.post {
-            url = "http://10.27.246.15/getOnlineLocations/"
+            url = root + "/getLocations/"
             params {
-                "id" - id
+                "key" - "web"
             }
             onSuccess { bytes ->
                 // handle data
                 res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
-                var index: Int
                 for (i in array.indices) {
-                    index = array.getJSONObject(i).getString("road").toInt()
-                    if (index == 0) {
-                        val lloc = array.getJSONObject(i).getString("location")
-                        val str = array.getJSONObject(i).getString("time")
-                        val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                        val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-                        val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
-                        act.addShareLoc(l, str);
-                    }
+                    val lloc = array.getJSONObject(i).getString("location")
+                    val str = "时间：" + array.getJSONObject(i).getString("time")
+                    val uid = "ID：" + array.getJSONObject(i).getString("id")
+                    val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+                    val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                    val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
+                    act.addShareLoc(l, uid, str);
                 }
             }
         }
@@ -98,7 +97,7 @@ class JavaHttpKolley {
     fun getHisRoadList(id: String, act: HisrotyLocationActivity) {
         val list = ArrayList<String>()
         Http.post {
-            url = "http://10.27.246.15/getHistoryRoadList/"
+            url = root + "/getHistoryRoadList/"
             params {
                 "id" - id
             }
@@ -117,7 +116,7 @@ class JavaHttpKolley {
     fun getHisLine(id: String, road: String, act: HisrotyLocationActivity) {
         var res: String
         Http.post {
-            url = "http://10.27.246.15/getHistoryRoad/"
+            url = root + "/getHistoryRoad/"
             params {
                 "id" - id
                 "road" - road
@@ -143,7 +142,7 @@ class JavaHttpKolley {
 
     fun addRoad(id: String, index: String) {
         Http.post {
-            url = "http://10.27.246.15/addRoad/"
+            url = root + "/addRoad/"
             params {
                 "id" - id
                 "road" - index
@@ -169,7 +168,7 @@ class JavaHttpKolley {
         str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
-            url = "http://10.27.246.15/addLocation/"
+            url = root + "/addLocation/"
             params {
                 "id" - userid
                 "road" - index
