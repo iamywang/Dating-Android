@@ -3,7 +3,6 @@ package cn.iamywang.mapchats;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,8 +14,6 @@ import com.amap.api.maps.*;
 import com.amap.api.maps.model.*;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class HisrotyLocationActivity extends AppCompatActivity implements LocationSource,
         AMapLocationListener {
@@ -34,7 +31,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "当前位置";
 
-    private String USERID = "1";
+    private String USERID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +178,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
             //设置定位监听
             mlocationClient.setLocationListener(this);
             //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Device_Sensors);
             //设置定位参数
             mlocationClient.setLocationOption(mLocationOption);
             mLocationOption.setInterval(100000);

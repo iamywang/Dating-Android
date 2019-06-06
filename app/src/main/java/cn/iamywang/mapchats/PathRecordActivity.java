@@ -36,7 +36,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "当前位置";
 
-    private String USERID = "1";
+    private String USERID;
     private Random rand = new Random();
     private int roadIndex = rand.nextInt(1000);
     private Boolean roadBool = true;
@@ -218,7 +218,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
             //设置定位监听
             mlocationClient.setLocationListener(this);
             //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Device_Sensors);
             //设置定位参数
             mlocationClient.setLocationOption(mLocationOption);
             mLocationOption.setInterval(10000);
@@ -245,7 +245,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
 
     private void addCircle(LatLng latlng, double radius) {
         CircleOptions options = new CircleOptions();
-        options.strokeWidth(1f);
+        options.strokeWidth(15);
         options.fillColor(FILL_COLOR);
         options.strokeColor(STROKE_COLOR);
         options.center(latlng);

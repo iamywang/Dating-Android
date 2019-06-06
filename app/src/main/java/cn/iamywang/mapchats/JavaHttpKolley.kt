@@ -11,7 +11,7 @@ import java.nio.charset.Charset
 import kotlin.random.Random
 
 class JavaHttpKolley {
-    val root = "http://192.168.43.241"
+    val root = "http://10.27.246.15"
     fun addLocation(id: String, loc: String, act: MapDemoActivity) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -20,12 +20,11 @@ class JavaHttpKolley {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
         val second = calendar.get(Calendar.SECOND)
-        val days = String.format("%0" + 2 + "d", day)
         val hou = String.format("%0" + 2 + "d", hour)
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append(".").append(month).append(".").append(days).append(" ").append(hou).append(":")
+        str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
             url = root + "/addLocation/"
@@ -45,12 +44,13 @@ class JavaHttpKolley {
     fun getHisMarker(id: String, act: MapDemoActivity) {
         var res: String
         Http.post {
-            url = root + "/getLocations/"
+            url = root + "/getAllLocations/"
             params {
-                "key" - id
+                "id" - id
             }
             onSuccess { bytes ->
                 // handle data
+                Toast.makeText(act, bytes.toString(Charset.defaultCharset()), Toast.LENGTH_LONG).show()
                 res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
                 var index: Int
@@ -82,13 +82,15 @@ class JavaHttpKolley {
                 res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
                 for (i in array.indices) {
-                    val lloc = array.getJSONObject(i).getString("location")
-                    val str = "时间：" + array.getJSONObject(i).getString("time")
-                    val uid = "ID：" + array.getJSONObject(i).getString("id")
-                    val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-                    val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
-                    act.addShareLoc(l, uid, str);
+                    if (array.getJSONObject(i).getString("id") != id) {
+                        val lloc = array.getJSONObject(i).getString("location")
+                        val str = "时间：" + array.getJSONObject(i).getString("time")
+                        val uid = "ID：" + array.getJSONObject(i).getString("id")
+                        val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+                        val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                        val l = LatLng(Double.parseDouble(loc1), Double.parseDouble(loc2))
+                        act.addShareLoc(l, uid, str);
+                    }
                 }
             }
         }

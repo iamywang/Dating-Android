@@ -17,8 +17,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp" android:layout_marginTop="16dp"
                 android:id="@+id/linearLayout">
             <ImageView
                     android:layout_width="100dp"
@@ -37,7 +35,7 @@
                 />
                 <TextView
                         android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/user_e1"
                         android:textAlignment="center" android:textColor="@android:color/black"
                         android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -170,7 +168,7 @@
                 />
                 <TextView
                         android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/user_e9"
                         android:textAlignment="center" android:textColor="@android:color/black"
                         android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -188,7 +186,7 @@
                 />
                 <TextView
                         android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/user_e7"
                         android:textAlignment="center" android:textColor="@android:color/black"
                         android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -205,7 +203,7 @@
                         android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"/>
                 <TextView
                         android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/user_e8"
                         android:textAlignment="center" android:textColor="@android:color/black"
                         android:textSize="15sp" android:layout_gravity="center_vertical" android:singleLine="true"
@@ -214,10 +212,10 @@
             <Button
                     android:text="提交"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/user_button"
                     android:onClick="Submit"
-                    android:layout_marginBottom="8dp"/>
+            />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

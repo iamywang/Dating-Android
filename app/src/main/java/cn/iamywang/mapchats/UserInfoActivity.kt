@@ -12,7 +12,7 @@ import com.ohmerhe.kolley.request.Http
 import java.nio.charset.Charset
 
 class UserInfoActivity : AppCompatActivity() {
-    val root = "http://192.168.43.241"
+    val root = "http://10.27.246.15"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)

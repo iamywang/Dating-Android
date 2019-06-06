@@ -13,7 +13,7 @@ import java.nio.charset.Charset
 import kotlin.random.Random
 
 class RegisterActivity : AppCompatActivity() {
-
+    val root = "http://10.27.246.15"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://192.168.43.241/insertUser/"
+            url = root + "insertUser/"
             params {
                 "id" - id.text.toString()
                 "name" - nick.text.toString()

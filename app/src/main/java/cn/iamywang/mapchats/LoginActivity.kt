@@ -13,7 +13,7 @@ import java.nio.charset.Charset
 
 
 class LoginActivity : AppCompatActivity() {
-
+    val root = "http://10.27.246.15"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = "http://192.168.43.241/login/"
+            url = root + "/login/"
             params {
                 "id" - user.text.toString()
                 "password" - pswd.text.toString()
