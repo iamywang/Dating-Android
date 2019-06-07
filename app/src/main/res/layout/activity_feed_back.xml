@@ -14,64 +14,117 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp" android:layout_marginStart="8dp">
-            <TableRow
+                android:id="@+id/linearLayout">
+            <TextView
+                    android:text="用户信息"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:layout_marginTop="2dp" android:layout_marginBottom="2dp">
+                    android:layout_height="40dp" android:id="@+id/feed_tip_1"
+                    android:gravity="center_vertical" android:textSize="15sp" android:textStyle="bold"
+                    android:textColor="@color/colorPrimary" android:layout_marginLeft="16dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
                 <TextView
-                        android:text="标题"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content" android:id="@+id/feed_t1" android:textAlignment="center"
-                        android:textColor="@android:color/black" android:layout_gravity="center_vertical"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:id="@+id/feed_e1"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"/>
+                <TextView
+                        android:text="用户id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/feed_t1"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical" android:layout_marginTop="2dp"
+                        android:layout_marginBottom="4dp"/>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/split_bar"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:id="@+id/feed_e2"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical" android:text="用户昵称"/>
+                <TextView
+                        android:text="用户昵称"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/feed_t2"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical" android:layout_marginTop="2dp"
+                        android:layout_marginBottom="4dp"/>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/split_bar"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/feed_e1"/>
-            </TableRow>
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" android:layout_marginTop="2dp" android:layout_marginBottom="2dp">
+                        android:id="@+id/feed_e3"
+                        android:textSize="16sp"
+                        android:inputType="text"/>
                 <TextView
                         android:text="联系方式"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content" android:id="@+id/feed_t2" android:textAlignment="center"
-                        android:textColor="@android:color/black" android:layout_gravity="center_vertical"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/feed_t3"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical" android:layout_marginTop="2dp"
+                        android:layout_marginBottom="4dp"/>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/split_bar"/>
+            <TextView
+                    android:text="反馈内容"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/feed_tip_2"
+                    android:gravity="center_vertical" android:textSize="15sp" android:textStyle="bold"
+                    android:textColor="@color/colorPrimary" android:layout_marginLeft="16dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/feed_e2"/>
-            </TableRow>
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" android:layout_marginTop="2dp" android:layout_marginBottom="2dp">
-                <TextView
-                        android:text="内容"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content" android:id="@+id/feed_t3" android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"/>
-            </TableRow>
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp" android:layout_marginTop="2dp" android:layout_marginBottom="2dp">
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:inputType="textMultiLine"
                         android:gravity="start|top"
                         android:ems="10"
-                        android:id="@+id/feed_e3"/>
-            </TableRow>
-            <Button
-                    android:text="提交"
+                        android:id="@+id/feed_e4" android:minLines="15" android:textSize="16sp"/>
+            </LinearLayout>
+            <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/feed_b1" android:onClick="OnButtonClick"
-            />
+                    android:layout_height="8dp"
+                    android:background="@color/split_bar"/>
+            <Button
+                    android:text="提交反馈"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/feed_button" android:onClick="OnButtonClick"/>
         </LinearLayout>
     </ScrollView>
 

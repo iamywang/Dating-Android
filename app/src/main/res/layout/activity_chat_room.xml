@@ -14,43 +14,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button2"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button3"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button4"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button5"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button6"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button7"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button8"/>
-        </LinearLayout>
+                      android:orientation="vertical"/>
     </ScrollView>
     <TableRow
             android:layout_width="0dp"
@@ -68,9 +32,9 @@
         <Button
                 android:text="发送"
                 android:layout_width="match_parent"
-                android:layout_height="34dp" android:id="@+id/fchat_b1"
-                android:background="@color/design_default_color_primary_dark"
+                android:layout_height="wrap_content" android:id="@+id/fchat_b1"
                 android:layout_gravity="center_horizontal|center_vertical" android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp" android:textColor="@android:color/white"/>
+                android:layout_marginRight="4dp" android:textColor="@android:color/black"
+                style="@android:style/Widget.Material.Light.Button"/>
     </TableRow>
 </android.support.constraint.ConstraintLayout>
