@@ -42,6 +42,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
     private Boolean roadBool = true;
     private Boolean enbableAddPath = false;
     private Double lat, lon;
+    private Double pathLength = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +75,26 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
         if(this.enbableAddPath){
             this.enbableAddPath = false;
             button.setText("开始");
+        } else {
+            this.enbableAddPath = true;
+            button.setText("停止");
             mLocationOption.setInterval(1000);
             mlocationClient.startLocation();
-            final long starttime = System.currentTimeMillis();
             class TimeRecordThread extends Thread {
-
+                private final long starttime = System.currentTimeMillis();
                 @Override
                 public void run() {
-                    long time = (System.currentTimeMillis() - starttime) / 1000;
-                    TextView timer_text = findViewById(R.id.record_t2);
-                    DecimalFormat df = new DecimalFormat("00");
-                    String tmp = df.format(time / 60) + ":" + df.format(time - (time / 60) * 60);
-                    timer_text.setText(tmp);
+                    while (true) {
+                        long time = (System.currentTimeMillis() - starttime) / 1000;
+                        TextView timer_text = findViewById(R.id.record_t2);
+                        DecimalFormat df = new DecimalFormat("00");
+                        String tmp = df.format(time / 60) + ":" + df.format(time - (time / 60) * 60);
+                        timer_text.setText(tmp);
+                    }
                 }
             }
             TimeRecordThread recordThread = new TimeRecordThread();
             recordThread.start();
-        } else {
-            this.enbableAddPath = true;
-            button.setText("停止");
         }
     }
 
@@ -245,7 +247,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
 
     private void addCircle(LatLng latlng, double radius) {
         CircleOptions options = new CircleOptions();
-        options.strokeWidth(15);
+        options.strokeWidth(1f);
         options.fillColor(FILL_COLOR);
         options.strokeColor(STROKE_COLOR);
         options.center(latlng);
@@ -268,11 +270,14 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
 
     public void addCurLine(LatLng l) {
         PolylineOptions options;
+        LatLng point1;
         if (mLocPoly != null) {
             options = mLocPoly.getOptions();
+            point1 = options.getPoints().get(options.getPoints().size() - 1);
 //            mLocPoly.remove();
         } else {
             options = new PolylineOptions();
+            point1 = l;
             aMap.addMarker(new MarkerOptions().position(l).title("起点").snippet("起点"));
         }
         options.add(l);
@@ -284,6 +289,11 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
 
         DecimalFormat df = new DecimalFormat("0.000000");
         String loc = df.format(this.lat) + "," + df.format(this.lon);
+        DecimalFormat df2 = new DecimalFormat("0.00");
+        this.pathLength += calculateLineDistance(point1,l);
+        String path = df2.format(this.pathLength)+"m";
+        TextView pathText = findViewById(R.id.record_t4);
+        pathText.setText(path);
 
         JavaHttpKolley jhk = new JavaHttpKolley();
         jhk.addCurLine(this.USERID, "" + this.roadIndex, loc);
@@ -291,5 +301,42 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
             jhk.addRoad(this.USERID, "" + this.roadIndex);
             this.roadBool = false;
         }
+    }
+    public double calculateLineDistance(LatLng start, LatLng end)
+    {
+        if ((start == null) || (end == null))
+        {
+            throw new IllegalArgumentException("非法坐标值，不能为null");
+        }
+        double d1 = 0.01745329251994329D;
+        double d2 = start.longitude;
+        double d3 = start.latitude;
+        double d4 = end.longitude;
+        double d5 = end.latitude;
+        d2 *= d1;
+        d3 *= d1;
+        d4 *= d1;
+        d5 *= d1;
+        double d6 = Math.sin(d2);
+        double d7 = Math.sin(d3);
+        double d8 = Math.cos(d2);
+        double d9 = Math.cos(d3);
+        double d10 = Math.sin(d4);
+        double d11 = Math.sin(d5);
+        double d12 = Math.cos(d4);
+        double d13 = Math.cos(d5);
+        double[] arrayOfDouble1 = new double[3];
+        double[] arrayOfDouble2 = new double[3];
+        arrayOfDouble1[0] = (d9 * d8);
+        arrayOfDouble1[1] = (d9 * d6);
+        arrayOfDouble1[2] = d7;
+        arrayOfDouble2[0] = (d13 * d12);
+        arrayOfDouble2[1] = (d13 * d10);
+        arrayOfDouble2[2] = d11;
+        double d14 = Math.sqrt((arrayOfDouble1[0] - arrayOfDouble2[0]) * (arrayOfDouble1[0] - arrayOfDouble2[0])
+                + (arrayOfDouble1[1] - arrayOfDouble2[1]) * (arrayOfDouble1[1] - arrayOfDouble2[1])
+                + (arrayOfDouble1[2] - arrayOfDouble2[2]) * (arrayOfDouble1[2] - arrayOfDouble2[2]));
+
+        return (Math.asin(d14 / 2.0D) * 12742001.579854401D);
     }
 }

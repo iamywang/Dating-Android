@@ -84,7 +84,7 @@ class JavaHttpKolley {
                 for (i in array.indices) {
                     if (array.getJSONObject(i).getString("id") != id) {
                         val lloc = array.getJSONObject(i).getString("location")
-                        val str = "时间：" + array.getJSONObject(i).getString("time")
+                        val str = array.getJSONObject(i).getString("time")
                         val uid = "ID：" + array.getJSONObject(i).getString("id")
                         val loc1 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                         val loc2 = lloc.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
