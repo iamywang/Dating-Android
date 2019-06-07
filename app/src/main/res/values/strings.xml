@@ -20,6 +20,8 @@
 
     <string name="user_id">用户id</string>
     <string name="user_name">用户昵称</string>
+    <string name="user_passwd">密码</string>
+    <string name="user_repasswd">确认密码</string>
     <string name="user_birth">生日</string>
     <string name="user_sex">性别</string>
     <string name="user_height">身高</string>

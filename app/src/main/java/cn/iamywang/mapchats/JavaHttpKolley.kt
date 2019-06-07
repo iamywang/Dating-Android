@@ -51,7 +51,6 @@ class JavaHttpKolley {
             }
             onSuccess { bytes ->
                 // handle data
-                Toast.makeText(act, bytes.toString(Charset.defaultCharset()), Toast.LENGTH_LONG).show()
                 res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
                 var index: Int
@@ -74,9 +73,9 @@ class JavaHttpKolley {
     fun getOnlineUser(id: String, act: MapDemoActivity) {
         var res: String
         Http.post {
-            url = root + "/getLocations/"
+            url = root + "/getOnlineUsers/"
             params {
-                "key" - "web"
+                "id" - id
             }
             onSuccess { bytes ->
                 // handle data

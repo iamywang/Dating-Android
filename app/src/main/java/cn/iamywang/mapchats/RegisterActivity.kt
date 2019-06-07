@@ -56,6 +56,7 @@ class RegisterActivity : AppCompatActivity() {
     fun Submit(view: View) {
         val id: TextView = findViewById(R.id.register_e1)
         val nick: EditText = findViewById(R.id.register_e2)
+        val passwd: EditText = findViewById(R.id.register_e10)
         val sex: EditText = findViewById(R.id.register_e3)
         val birth: EditText = findViewById(R.id.register_e4)
         val height: EditText = findViewById(R.id.register_e5)
@@ -64,10 +65,11 @@ class RegisterActivity : AppCompatActivity() {
         Http.init(this)
         val act = this
         Http.post {
-            url = root + "insertUser/"
+            url = root + "/insertUser2/"
             params {
                 "id" - id.text.toString()
                 "name" - nick.text.toString()
+                "passwd" - passwd.text.toString()
                 "sex" - sex.text.toString()
                 "birth" - birth.text.toString()
                 "height" - height.text.toString()

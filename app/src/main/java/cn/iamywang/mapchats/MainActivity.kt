@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (id == R.id.nav_home) {
             val intent = Intent(this, UserInfoActivity::class.java)
             intent.putExtra("id", this.USERID)
-            intent.putExtra("loc", "济南")
+            intent.putExtra("loc", "中国山东省济南市")
             startActivity(intent)
         } else if (id == R.id.nav_map) {
             val intent = Intent(this, MapDemoActivity::class.java)
