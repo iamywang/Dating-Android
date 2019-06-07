@@ -137,6 +137,7 @@ class JavaHttpKolley {
                 }
                 val rand = Random(road.toInt())
                 val color = Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255))
+                act.PATHID = road
                 act.addHisLine(
                     latlngList,
                     color,
@@ -187,4 +188,70 @@ class JavaHttpKolley {
             }
         }
     }
+
+    fun loginApp(id: String, passwd: String, act: LoginActivity) {
+        Http.post {
+            url = root + "/login/"
+            params {
+                "id" - id
+                "password" - passwd
+            }
+            onSuccess { bytes ->
+                // handle data
+                val str = bytes.toString(Charset.defaultCharset())
+                val list = JSON.parseObject(str)
+                val lintent = act.intent
+                lintent.putExtra("id", id)
+                lintent.putExtra("name", list["name"].toString())
+                act.setResult(2, lintent)
+                Toast.makeText(act, "登录成功", Toast.LENGTH_LONG).show()
+                act.finish()
+            }
+        }
+    }
+
+    fun registerUser(
+        id: String,
+        nick: String,
+        passwd: String,
+        sex: String,
+        birth: String,
+        height: String,
+        weight: String,
+        regdate: String,
+        act: RegisterActivity
+    ) {
+        Http.post {
+            url = root + "/insertUser2/"
+            params {
+                "id" - id
+                "name" - nick
+                "passwd" - passwd
+                "sex" - sex
+                "birth" - birth
+                "height" - height
+                "weight" - weight
+                "reg" - regdate
+                "login" - regdate
+            }
+            onSuccess { bytes ->
+                // handle data
+                Toast.makeText(act, bytes.toString(Charset.defaultCharset()), Toast.LENGTH_LONG).show()
+                act.finish()
+            }
+        }
+    }
+
+    fun setOffline(id: String) {
+        Http.post {
+            url = root + "/setOffline/"
+            params {
+                "id" - id
+            }
+            onSuccess {
+
+            }
+        }
+    }
+
 }

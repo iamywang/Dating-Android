@@ -21,9 +21,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".PathResultActivity"
-                  android:label="@string/title_activity_path_result"
-                  android:theme="@style/AppTheme">
+        <activity android:name=".HistoryPathListActivity">
+        </activity>
+        <activity
+                android:name=".PathResultActivity"
+                android:label="@string/title_activity_path_result"
+                android:theme="@style/AppTheme">
         </activity>
         <activity
                 android:name=".PathRecordActivity"

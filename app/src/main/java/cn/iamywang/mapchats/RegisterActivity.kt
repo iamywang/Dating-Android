@@ -13,7 +13,6 @@ import java.nio.charset.Charset
 import kotlin.random.Random
 
 class RegisterActivity : AppCompatActivity() {
-    val root = "http://10.27.246.15"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,25 +62,17 @@ class RegisterActivity : AppCompatActivity() {
         val weight: EditText = findViewById(R.id.register_e6)
         val regdate: TextView = findViewById(R.id.register_e8)
         Http.init(this)
-        val act = this
-        Http.post {
-            url = root + "/insertUser2/"
-            params {
-                "id" - id.text.toString()
-                "name" - nick.text.toString()
-                "passwd" - passwd.text.toString()
-                "sex" - sex.text.toString()
-                "birth" - birth.text.toString()
-                "height" - height.text.toString()
-                "weight" - weight.text.toString()
-                "reg" - regdate.text.toString()
-                "login" - regdate.text.toString()
-            }
-            onSuccess { bytes ->
-                // handle data
-                Toast.makeText(act, bytes.toString(Charset.defaultCharset()), Toast.LENGTH_LONG).show()
-                act.finish()
-            }
-        }
+        val jhk = JavaHttpKolley()
+        jhk.registerUser(
+            id.text.toString(),
+            nick.text.toString(),
+            passwd.text.toString(),
+            sex.text.toString(),
+            birth.text.toString(),
+            height.text.toString(),
+            weight.text.toString(),
+            regdate.text.toString(),
+            this
+        )
     }
 }

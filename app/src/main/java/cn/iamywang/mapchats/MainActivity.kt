@@ -14,7 +14,6 @@ import android.view.MenuItem
 
 import android.widget.TextView
 import android.widget.Toast
-import com.ohmerhe.kolley.request.Http
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var USERID = "1"
@@ -79,15 +78,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             exitTime = System.currentTimeMillis()
         } else {
             finish()
-            Http.post {
-                url = "http://10.27.246.15/setOffline/"
-                params {
-                    "id" - USERID
-                }
-                onSuccess {
-
-                }
-            }
+            val jhk = JavaHttpKolley()
+            jhk.setOffline(this.USERID)
             System.exit(0)
         }
     }
