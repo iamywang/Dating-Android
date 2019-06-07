@@ -31,7 +31,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     private Circle mCircle;
     public static final String LOCATION_MARKER_FLAG = "当前位置";
 
-    private String USERID;
+    private String USERID,PATHID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +44,18 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         }
         Intent infointent = getIntent();
         this.USERID = infointent.getStringExtra("id");
+        this.PATHID = infointent.getStringExtra("path");
 
         mapView = (MapView) findViewById(R.id.his_map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
-        JavaHttpKolley jhk = new JavaHttpKolley();
-        jhk.getHisRoadList(this.USERID, this);
+        if (!this.PATHID.equals("0")) {
+            JavaHttpKolley jhk = new JavaHttpKolley();
+            jhk.getHisRoadList(this.USERID, this);
+        } else {
+            JavaHttpKolley jhk = new JavaHttpKolley();
+            jhk.getHisLine(this.USERID, this.PATHID, this);
+        }
     }
 
     @Override
@@ -259,11 +265,11 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
             public void run() {
                 try {
                     for (int i = 1; i < list.size(); i++) {
-                        Thread.sleep(300);
+                        Thread.sleep(400);
                         pathMarker.setPosition(list.get(i));
                         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(i), 16));
                     }
-                    Thread.sleep(300);
+                    Thread.sleep(400);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

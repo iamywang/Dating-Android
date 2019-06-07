@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".PathResultActivity">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="-16dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="8dp">
+                <ImageView
+                        android:layout_width="160dp"
+                        android:layout_height="80dp" app:srcCompat="@mipmap/head"
+                        android:layout_weight="1"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_weight="1" android:layout_gravity="bottom"
+                        android:layout_marginLeft="8dp">
+                    <TextView
+                            android:text="用户昵称"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/result_nick" android:layout_weight="1"
+                            android:textColor="@android:color/black" android:gravity="center_vertical"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+                    <TextView
+                            android:text="用户id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/result_id"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black" android:gravity="center_vertical"
+                    />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/split_bar"/>
+            <TextView
+                    android:text="2019.6.7 12:00"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp" android:id="@+id/result_time"
+                    android:textColor="@android:color/darker_gray" android:gravity="center_horizontal|center_vertical"
+                    android:textSize="18sp"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            >
+                <TextView
+                        android:text="500.00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/result_length"
+                        android:textColor="@android:color/black"
+                        android:textSize="36sp"
+                />
+                <TextView
+                        android:text="m"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/result_tip3"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1" android:textSize="14sp"
+                        android:layout_marginLeft="4dp"/>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/split_bar"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:gravity="center_horizontal"
+            >
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    <TextView
+                            android:text="路径标识"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_tip1"
+                            android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
+                    />
+                    <TextView
+                            android:text="123"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_tag"
+                            android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    <TextView
+                            android:text="热量"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_tip2"
+                            android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
+                    />
+                    <TextView
+                            android:text="0千卡"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_hot"
+                            android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/split_bar"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:gravity="center_horizontal"
+            >
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    <TextView
+                            android:text="运动时间"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_tip4"
+                            android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
+                    />
+                    <TextView
+                            android:text="00:00"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_run"
+                            android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    <TextView
+                            android:text="平均配速"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_tip5"
+                            android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
+                    />
+                    <TextView
+                            android:text="0.00km/h"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp" android:id="@+id/result_speed"
+                            android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/split_bar"/>
+            <Button
+                    android:text="分享"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/result_share" android:textSize="15sp"
+                    android:onClick="sharePath"/>
+            <Button
+                    android:text="查看轨迹"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/result_look" android:textSize="15sp"
+                    android:onClick="lookPathLine"/>
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

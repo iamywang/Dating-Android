@@ -3,6 +3,7 @@ package cn.iamywang.mapchats;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import com.amap.api.maps.*;
 import com.amap.api.maps.model.*;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class PathRecordActivity extends AppCompatActivity implements LocationSource,
@@ -93,7 +95,19 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
             this.enbableAddPath = false;
             button.setText("开始");
             button.setEnabled(false);
+            TextView time_view = findViewById(R.id.record_t2);
+            Intent intent = new Intent(PathRecordActivity.this, PathResultActivity.class);
+            intent.putExtra("id", this.USERID);
+            intent.putExtra("nick", getIntent().getStringExtra("nick"));
+            intent.putExtra("num", "" + this.roadIndex);
+            Date start_date = new Date(recordThread.starttime);
+            SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:dd");
+            intent.putExtra("start", "" + sdFormatter.format(start_date));
+            intent.putExtra("time", time_view.getText().toString());
+            intent.putExtra("length", "" + this.pathLength);
+            startActivity(intent);
             recordThread.exit = true;
+            PathRecordActivity.this.finish();
         } else {
             this.enbableAddPath = true;
             button.setText("停止");

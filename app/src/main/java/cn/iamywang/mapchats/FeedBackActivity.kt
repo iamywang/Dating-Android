@@ -4,12 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.alibaba.fastjson.JSON
 import com.ohmerhe.kolley.request.Http
-import java.nio.charset.Charset
 
 class FeedBackActivity : AppCompatActivity() {
 
@@ -23,8 +20,11 @@ class FeedBackActivity : AppCompatActivity() {
         }
         val feed_intent = intent
         val userid = feed_intent.getStringExtra("id").toString()
+        val usernick = feed_intent.getStringExtra("nick").toString()
         val id_view:TextView = findViewById(R.id.feed_e1)
+        val nick_view:TextView = findViewById(R.id.feed_e2)
         id_view.setText(userid)
+        nick_view.setText(usernick)
         Http.init(this)
     }
 
@@ -39,6 +39,5 @@ class FeedBackActivity : AppCompatActivity() {
     fun OnButtonClick(view: View){
         this.finish()
         Toast.makeText(this, "反馈成功", Toast.LENGTH_LONG).show()
-
     }
 }

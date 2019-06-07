@@ -11,7 +11,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 26
         versionCode 20190607
-        versionName "2019.a.190607v1--beta"
+        versionName "2019.a.190607v4--beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
