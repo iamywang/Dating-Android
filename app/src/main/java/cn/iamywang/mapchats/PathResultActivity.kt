@@ -37,12 +37,12 @@ class PathResultActivity : AppCompatActivity() {
 
         val min = info_time.split(':')[0].toInt()
         val sec = info_time.split(':')[1].toInt()
-        val speed = (3.6 * info_length.toDouble() / (min * 60 + sec)).toString() + "km/h"
+        val speed = String.format("%.2f", (3.6 * info_length.toDouble() / (min * 60 + sec))) + "km/h"
 
         id_View.setText(info_id)
         nick_View.setText(info_nick)
         start_View.setText(info_start)
-        length_View.setText(info_length)
+        length_View.setText(String.format("%.2f", info_length.toDouble()))
         num_View.setText(info_num)
         time_View.setText(info_time)
         speed_View.setText(speed)
@@ -56,14 +56,14 @@ class PathResultActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun lookPathLine(view: View){
+    fun lookPathLine(view: View) {
         val intent = Intent(this, HisrotyLocationActivity::class.java)
-            intent.putExtra("id",findViewById<TextView>(R.id.result_id).text)
+        intent.putExtra("id", findViewById<TextView>(R.id.result_id).text)
         intent.putExtra("path", findViewById<TextView>(R.id.result_tag).text)
         startActivity(intent)
     }
 
-    fun sharePath(view: View){
+    fun sharePath(view: View) {
         Toast.makeText(this, "分享功能正在开发...", Toast.LENGTH_LONG).show()
     }
 }

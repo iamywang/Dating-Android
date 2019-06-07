@@ -49,7 +49,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         mapView = (MapView) findViewById(R.id.his_map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
-        if (!this.PATHID.equals("0")) {
+        if (this.PATHID.equals("0")) {
             JavaHttpKolley jhk = new JavaHttpKolley();
             jhk.getHisRoadList(this.USERID, this);
         } else {
