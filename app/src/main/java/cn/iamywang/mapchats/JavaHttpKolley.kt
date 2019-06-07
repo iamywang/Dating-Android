@@ -12,6 +12,7 @@ import kotlin.random.Random
 
 class JavaHttpKolley {
     val root = "http://10.27.246.15"
+
     fun addLocation(id: String, loc: String, act: MapDemoActivity) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -137,7 +138,12 @@ class JavaHttpKolley {
                 }
                 val rand = Random(road.toInt())
                 val color = Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255))
-                act.addHisLine(latlngList, color)
+                act.addHisLine(
+                    latlngList,
+                    color,
+                    array.getJSONObject(0).getString("time"),
+                    array.getJSONObject(array.size - 1).getString("time")
+                )
             }
         }
     }

@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val id = findViewById<TextView>(R.id.textView_id)
             val nick = findViewById<TextView>(R.id.textView_name)
             this.USERID = data!!.getStringExtra("id")
-            val tmpid = "ID：" + this.USERID
-            val tmpname = "昵称：" + data.getStringExtra("name")
+            val tmpid = this.USERID
+            val tmpname = data.getStringExtra("name")
             id.text = tmpid
             nick.text = tmpname
         }
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             finish()
             Http.post {
-                url = "http://192.168.43.241/setOffline/"
+                url = "http://10.27.246.15/setOffline/"
                 params {
                     "id" - USERID
                 }

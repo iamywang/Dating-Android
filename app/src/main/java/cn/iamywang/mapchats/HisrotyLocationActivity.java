@@ -87,7 +87,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
-//        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6507007,117.1140042),11));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6507007,117.1140042),11));
     }
 
     /**
@@ -227,7 +227,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
     }
 
 
-    public void addHisLine(List<LatLng> list, int color) {
+    public void addHisLine(List<LatLng> list, int color,String start,String end) {
         PolylineOptions options = new PolylineOptions();
         options.addAll(list);
         options.width(15);
@@ -235,7 +235,7 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         options.lineJoinType(PolylineOptions.LineJoinType.LineJoinRound);
         options.lineCapType(PolylineOptions.LineCapType.LineCapRound);
         options.setDottedLine(true);
-        aMap.addMarker(new MarkerOptions().position(list.get(0)).title("起点").snippet("起点"));
+        aMap.addMarker(new MarkerOptions().position(list.get(0)).title("起点").snippet(start));
         aMap.addPolyline(options);
 
         MarkerOptions pathMarkerOptions = new MarkerOptions();
@@ -272,6 +272,6 @@ public class HisrotyLocationActivity extends AppCompatActivity implements Locati
         }
         PathReviewThread t = new PathReviewThread(list, pathMarker);
         t.start();
-        aMap.addMarker(new MarkerOptions().position(list.get(list.size() - 1)).title("终点").snippet("终点"));
+        aMap.addMarker(new MarkerOptions().position(list.get(list.size() - 1)).title("终点").snippet(end));
     }
 }

@@ -3,4 +3,5 @@
     <color name="colorPrimary">#708090</color>
     <color name="colorPrimaryDark">#708090</color>
     <color name="colorAccent">#708090</color>
+    <color name="split_bar">#EEEEEE</color>
 </resources>

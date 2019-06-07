@@ -14,6 +14,7 @@ import kotlin.random.Random
 
 class RegisterActivity : AppCompatActivity() {
     val root = "http://10.27.246.15"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -36,11 +37,11 @@ class RegisterActivity : AppCompatActivity() {
         val hou = String.format("%0" + 2 + "d", hour)
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
-        val rand = Random(Calendar.MINUTE * Calendar.SECOND)
+        val rand = Random(hour * minute * sec.toInt())
         val str = StringBuffer("")
         str.append(year).append(".").append(mon).append(".").append(days).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
-        id.setText(rand.nextInt(10000).toString())
+        id.setText(rand.nextInt(100000).toString())
         regdate.setText(str.toString())
     }
 

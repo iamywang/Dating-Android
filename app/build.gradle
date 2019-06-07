@@ -34,9 +34,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.amap.api:3dmap:6.8.0'
-    //定位功能
     implementation 'com.amap.api:location:4.6.0'
-    //搜索功能
     implementation 'com.amap.api:search:6.5.0.1'
     implementation 'com.ohmerhe.kolley:kolley:0.3.1'
     implementation 'com.alibaba:fastjson:1.1.71.android'

@@ -37,12 +37,29 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
     public static final String LOCATION_MARKER_FLAG = "当前位置";
 
     private String USERID;
+
     private Random rand = new Random();
-    private int roadIndex = rand.nextInt(1000);
-    private Boolean roadBool = true;
-    private Boolean enbableAddPath = false;
-    private Double lat, lon;
-    private Double pathLength = 0.00;
+    private int roadIndex = rand.nextInt(1000);//路径编号
+    private Boolean roadBool = true;//是否首次添加
+    private Boolean enbableAddPath = false;//是否允许记录轨迹
+    private Double lat, lon;//记录当前位置
+    private Double pathLength = 0.00;//记录路径长度
+    private TimeRecordThread recordThread;//计时线程
+
+    class TimeRecordThread extends Thread {
+        private final long starttime = System.currentTimeMillis();
+        private Boolean exit = false;
+        @Override
+        public void run() {
+            while (!exit) {
+                long time = (System.currentTimeMillis() - starttime) / 1000;
+                TextView timer_text = findViewById(R.id.record_t2);
+                DecimalFormat df = new DecimalFormat("00");
+                String tmp = df.format(time / 60) + ":" + df.format(time - (time / 60) * 60);
+                timer_text.setText(tmp);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,25 +92,14 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
         if(this.enbableAddPath){
             this.enbableAddPath = false;
             button.setText("开始");
+            button.setEnabled(false);
+            recordThread.exit = true;
         } else {
             this.enbableAddPath = true;
             button.setText("停止");
             mLocationOption.setInterval(1000);
             mlocationClient.startLocation();
-            class TimeRecordThread extends Thread {
-                private final long starttime = System.currentTimeMillis();
-                @Override
-                public void run() {
-                    while (true) {
-                        long time = (System.currentTimeMillis() - starttime) / 1000;
-                        TextView timer_text = findViewById(R.id.record_t2);
-                        DecimalFormat df = new DecimalFormat("00");
-                        String tmp = df.format(time / 60) + ":" + df.format(time - (time / 60) * 60);
-                        timer_text.setText(tmp);
-                    }
-                }
-            }
-            TimeRecordThread recordThread = new TimeRecordThread();
+            recordThread = new TimeRecordThread();
             recordThread.start();
         }
     }
@@ -274,7 +280,6 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
         if (mLocPoly != null) {
             options = mLocPoly.getOptions();
             point1 = options.getPoints().get(options.getPoints().size() - 1);
-//            mLocPoly.remove();
         } else {
             options = new PolylineOptions();
             point1 = l;
