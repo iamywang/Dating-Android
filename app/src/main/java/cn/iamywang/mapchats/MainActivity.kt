@@ -20,13 +20,14 @@ import cn.iamywang.mapchats.activity.friend.LocationShareActivity
 import cn.iamywang.mapchats.activity.misc.AboutActivity
 import cn.iamywang.mapchats.activity.misc.FeedBackActivity
 import cn.iamywang.mapchats.activity.path.HisrotyLocationActivity
+import cn.iamywang.mapchats.activity.path.HistoryPathListActivity
 import cn.iamywang.mapchats.activity.path.PathRecordActivity
 import cn.iamywang.mapchats.activity.user.LoginActivity
 import cn.iamywang.mapchats.activity.user.UserInfoActivity
 import cn.iamywang.mapchats.util.JavaHttpKolley
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private var USERID = "1"
+    private var USERID = ""
     private var exitTime = System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,11 +64,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (requestCode == 1 && resultCode == 2) {
             val id = findViewById<TextView>(R.id.textView_id)
             val nick = findViewById<TextView>(R.id.textView_name)
-            this.USERID = data!!.getStringExtra("id")
-            val tmpid = this.USERID
-            val tmpname = data.getStringExtra("name")
-            id.text = tmpid
-            nick.text = tmpname
+            if (data != null) {
+                this.USERID = data.getStringExtra("id")
+                val tmpid = this.USERID
+                val tmpname = data.getStringExtra("name")
+                id.text = tmpid
+                nick.text = tmpname
+            }
         }
     }
 
@@ -107,9 +110,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("id", this.USERID)
             startActivity(intent)
         } else if (id == R.id.nav_gps) {
-            val intent = Intent(this, HisrotyLocationActivity::class.java)
+            val intent = Intent(this, HistoryPathListActivity::class.java)
             intent.putExtra("id", this.USERID)
-            intent.putExtra("path", "0")
+            startActivity(intent)
             startActivity(intent)
         } else if (id == R.id.nav_record) {
             val intent = Intent(this, PathRecordActivity::class.java)
@@ -129,7 +132,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
             startActivity(intent)
         } else if (id == R.id.nav_share) {
-            Toast.makeText(this, "分享功能正在开发...", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, FeedBackActivity::class.java)
+            intent.putExtra("id", this.USERID)
+            intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
         } else if (id == R.id.nav_about) {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)

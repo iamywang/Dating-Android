@@ -32,7 +32,8 @@
     <string name="title_activity_user">我的信息</string>
     <string name="title_activity_reg">注册新用户</string>
     <string name="title_activity_map">地图</string>
-    <string name="title_activity_gps">历史轨迹</string>
+    <string name="title_activity_history">历史轨迹</string>
+    <string name="title_activity_gps">历史轨迹回放</string>
     <string name="title_activity_path">轨迹记录</string>
     <string name="title_activity_path_result">轨迹记录结果</string>
     <string name="title_activity_friend">好友列表</string>

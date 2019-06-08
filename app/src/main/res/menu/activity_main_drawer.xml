@@ -21,6 +21,11 @@
                     android:id="@+id/nav_gps"
                     android:icon="@drawable/ic_history"
                     android:title="@string/menu_gps"/>
+
+        </menu>
+    </item>
+    <item android:title="功能测试">
+        <menu>
             <item
                     android:id="@+id/nav_friends"
                     android:icon="@drawable/ic_friend"
@@ -31,7 +36,6 @@
                     android:title="@string/menu_chat"/>
         </menu>
     </item>
-
     <item android:title="@string/menu_about">
         <menu>
             <item

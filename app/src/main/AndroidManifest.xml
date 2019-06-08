@@ -21,18 +21,6 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".activity.path.HistoryPathListActivity">
-        </activity>
-        <activity
-                android:name=".activity.path.PathResultActivity"
-                android:label="@string/title_activity_path_result"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
-                android:name=".activity.path.PathRecordActivity"
-                android:label="@string/title_activity_path"
-                android:theme="@style/AppTheme">
-        </activity>
 
         <meta-data
                 android:name="com.amap.api.v2.apikey"
@@ -94,6 +82,20 @@
         <activity
                 android:name=".activity.friend.LocationShareActivity"
                 android:label="@string/title_activity_map"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".activity.path.HistoryPathListActivity"
+                  android:label="@string/title_activity_history"
+                  android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".activity.path.PathResultActivity"
+                android:label="@string/title_activity_path_result"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".activity.path.PathRecordActivity"
+                android:label="@string/title_activity_path"
                 android:theme="@style/AppTheme">
         </activity>
     </application>

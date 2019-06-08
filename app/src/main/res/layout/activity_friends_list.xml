@@ -10,67 +10,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-            <Button
-                    android:text="  好友"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white" android:textAlignment="textStart"
-                    android:textSize="16sp" style="@android:style/Widget.Material.Button"
-                    android:layout_height="80dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-        </LinearLayout>
+                      android:orientation="vertical"/>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

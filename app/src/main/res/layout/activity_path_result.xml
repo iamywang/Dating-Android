@@ -29,14 +29,12 @@
                         android:layout_height="wrap_content" android:layout_weight="1" android:layout_gravity="bottom"
                         android:layout_marginLeft="8dp">
                     <TextView
-                            android:text="用户昵称"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/result_nick" android:layout_weight="1"
                             android:textColor="@android:color/black" android:gravity="center_vertical"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
                     <TextView
-                            android:text="用户id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/result_id"
                             android:layout_weight="1"
@@ -49,7 +47,6 @@
                     android:layout_height="8dp"
                     android:background="@color/split_bar"/>
             <TextView
-                    android:text="2019.6.7 12:00"
                     android:layout_width="match_parent"
                     android:layout_height="48dp" android:id="@+id/result_time"
                     android:textColor="@android:color/darker_gray" android:gravity="center_horizontal|center_vertical"
@@ -60,7 +57,6 @@
                     android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
             >
                 <TextView
-                        android:text="500.00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/result_length"
                         android:textColor="@android:color/black"
@@ -94,7 +90,6 @@
                             android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
                     />
                     <TextView
-                            android:text="123"
                             android:layout_width="180dp"
                             android:layout_height="40dp" android:id="@+id/result_tag"
                             android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
@@ -111,7 +106,6 @@
                             android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
                     />
                     <TextView
-                            android:text="0千卡"
                             android:layout_width="180dp"
                             android:layout_height="40dp" android:id="@+id/result_hot"
                             android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
@@ -138,7 +132,6 @@
                             android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
                     />
                     <TextView
-                            android:text="00:00"
                             android:layout_width="180dp"
                             android:layout_height="40dp" android:id="@+id/result_run"
                             android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"
@@ -155,7 +148,6 @@
                             android:textColor="@color/colorPrimary" android:gravity="center_horizontal|center_vertical"
                     />
                     <TextView
-                            android:text="0.00km/h"
                             android:layout_width="180dp"
                             android:layout_height="40dp" android:id="@+id/result_speed"
                             android:textColor="@android:color/black" android:gravity="center_horizontal|center_vertical"

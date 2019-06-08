@@ -58,7 +58,7 @@
                         android:id="@+id/feed_e2"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:gravity="center_vertical" android:text="用户昵称"/>
+                        android:gravity="center_vertical"/>
                 <TextView
                         android:text="用户昵称"
                         android:layout_width="wrap_content"

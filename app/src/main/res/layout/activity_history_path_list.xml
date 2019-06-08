@@ -9,6 +9,12 @@
 
     <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:id="@+id/path_list"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="0dp">
     </ListView>
+    <include android:layout_width="wrap_content" android:layout_height="wrap_content"
+             layout="@layout/item_path_list"
+    />
+
 </android.support.constraint.ConstraintLayout>

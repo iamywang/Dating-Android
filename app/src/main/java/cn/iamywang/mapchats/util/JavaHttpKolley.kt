@@ -147,7 +147,7 @@ class JavaHttpKolley {
                 act.addHisLine(
                     latlngList,
                     color,
-                    array.getJSONObject(0).getString("time"),
+                    array.getJSONObject(  0).getString("time"),
                     array.getJSONObject(array.size - 1).getString("time")
                 )
             }
@@ -270,8 +270,22 @@ class JavaHttpKolley {
                 val res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
                 for (i in array.indices) {
-                    val userid = array.getJSONObject(i).getString("id")
                     val road = array.getJSONObject(i).getString("road")
+                    Http.post {
+                        url = root + "/getHistoryRoad/"
+                        params {
+                            "id" - id
+                            "road" - road
+                        }
+                        onSuccess { bytes ->
+                            // handle data
+                            val array2 = JSON.parseArray(bytes.toString(Charset.defaultCharset()))
+                            val path_time = array2.getJSONObject(0).getString("time")
+                            val path_loc = array2.getJSONObject(0).getString("location")
+                            act.list.add(HistoryPathItem(id, road, path_time, path_loc))
+                            act.setAdapter()
+                        }
+                    }
                 }
             }
         }
