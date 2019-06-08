@@ -1,14 +1,15 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.friend
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import cn.iamywang.mapchats.R
 
-class HistoryPathListActivity : AppCompatActivity() {
+class FriendsListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history_path_list)
+        setContentView(R.layout.activity_friends_list)
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true)

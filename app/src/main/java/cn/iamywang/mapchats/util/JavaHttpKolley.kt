@@ -1,8 +1,14 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.util
 
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.widget.Toast
+import cn.iamywang.mapchats.activity.friend.FriendsListActivity
+import cn.iamywang.mapchats.activity.friend.LocationShareActivity
+import cn.iamywang.mapchats.activity.path.HisrotyLocationActivity
+import cn.iamywang.mapchats.activity.path.HistoryPathListActivity
+import cn.iamywang.mapchats.activity.user.LoginActivity
+import cn.iamywang.mapchats.activity.user.RegisterActivity
 import com.alibaba.fastjson.JSON
 import com.amap.api.maps.model.LatLng
 import com.ohmerhe.kolley.request.Http
@@ -13,7 +19,7 @@ import kotlin.random.Random
 class JavaHttpKolley {
     val root = "http://10.27.246.15"
 
-    fun addLocation(id: String, loc: String, act: MapDemoActivity) {
+    fun addLocation(id: String, loc: String, act: LocationShareActivity) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
@@ -25,7 +31,7 @@ class JavaHttpKolley {
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
+        str.append(year).append("").append(month).append("").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
             url = root + "/addLocation/"
@@ -42,7 +48,7 @@ class JavaHttpKolley {
         }
     }
 
-    fun getHisMarker(id: String, act: MapDemoActivity) {
+    fun getHisMarker(id: String, act: LocationShareActivity) {
         var res: String
         Http.post {
             url = root + "/getAllLocations/"
@@ -70,7 +76,7 @@ class JavaHttpKolley {
         }
     }
 
-    fun getOnlineUser(id: String, act: MapDemoActivity) {
+    fun getOnlineUser(id: String, act: LocationShareActivity) {
         var res: String
         Http.post {
             url = root + "/getOnlineUsers/"
@@ -173,7 +179,7 @@ class JavaHttpKolley {
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
+        str.append(year).append("").append(month).append("").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
             url = root + "/addLocation/"

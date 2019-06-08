@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.user
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import cn.iamywang.mapchats.R
 import com.alibaba.fastjson.JSON
 import com.ohmerhe.kolley.request.Http
 import java.nio.charset.Charset

@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats;
+package cn.iamywang.mapchats.util;
 
 import android.content.Context;
 import android.hardware.Sensor;

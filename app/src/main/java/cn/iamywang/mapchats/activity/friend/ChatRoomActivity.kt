@@ -1,8 +1,9 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.friend
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import cn.iamywang.mapchats.R
 
 class ChatRoomActivity : AppCompatActivity() {
 

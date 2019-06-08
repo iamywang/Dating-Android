@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats;
+package cn.iamywang.mapchats.activity.path;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import cn.iamywang.mapchats.R;
+import cn.iamywang.mapchats.util.JavaHttpKolley;
 import com.amap.api.maps.*;
 import com.amap.api.maps.model.*;
 

@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.util
 
 import android.os.Handler
 import java.lang.ref.WeakReference

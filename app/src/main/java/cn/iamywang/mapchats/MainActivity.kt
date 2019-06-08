@@ -14,6 +14,16 @@ import android.view.MenuItem
 
 import android.widget.TextView
 import android.widget.Toast
+import cn.iamywang.mapchats.activity.friend.ChatRoomActivity
+import cn.iamywang.mapchats.activity.friend.FriendsListActivity
+import cn.iamywang.mapchats.activity.friend.LocationShareActivity
+import cn.iamywang.mapchats.activity.misc.AboutActivity
+import cn.iamywang.mapchats.activity.misc.FeedBackActivity
+import cn.iamywang.mapchats.activity.path.HisrotyLocationActivity
+import cn.iamywang.mapchats.activity.path.PathRecordActivity
+import cn.iamywang.mapchats.activity.user.LoginActivity
+import cn.iamywang.mapchats.activity.user.UserInfoActivity
+import cn.iamywang.mapchats.util.JavaHttpKolley
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var USERID = "1"
@@ -93,7 +103,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("loc", "中国山东省济南市")
             startActivity(intent)
         } else if (id == R.id.nav_map) {
-            val intent = Intent(this, MapDemoActivity::class.java)
+            val intent = Intent(this, LocationShareActivity::class.java)
             intent.putExtra("id", this.USERID)
             startActivity(intent)
         } else if (id == R.id.nav_gps) {

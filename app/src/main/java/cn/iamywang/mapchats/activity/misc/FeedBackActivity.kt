@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.misc
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import cn.iamywang.mapchats.R
 import com.ohmerhe.kolley.request.Http
 
 class FeedBackActivity : AppCompatActivity() {

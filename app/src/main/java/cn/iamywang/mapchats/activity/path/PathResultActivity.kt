@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.path
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import cn.iamywang.mapchats.R
 
 class PathResultActivity : AppCompatActivity() {
 

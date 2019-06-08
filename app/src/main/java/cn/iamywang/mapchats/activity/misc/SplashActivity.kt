@@ -1,9 +1,12 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.misc
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
+import cn.iamywang.mapchats.MainActivity
+import cn.iamywang.mapchats.R
+import cn.iamywang.mapchats.util.UIHandler
 
 class SplashActivity : AppCompatActivity() {
 

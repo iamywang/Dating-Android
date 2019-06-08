@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.user
 
 import android.icu.util.Calendar
 import android.support.v7.app.AppCompatActivity
@@ -7,9 +7,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
+import cn.iamywang.mapchats.R
+import cn.iamywang.mapchats.util.JavaHttpKolley
 import com.ohmerhe.kolley.request.Http
-import java.nio.charset.Charset
 import kotlin.random.Random
 
 class RegisterActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         val sec = String.format("%0" + 2 + "d", second)
         val rand = Random(hour * minute * sec.toInt())
         val str = StringBuffer("")
-        str.append(year).append(".").append(mon).append(".").append(days).append(" ").append(hou).append(":")
+        str.append(year).append("").append(mon).append("").append(days).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         id.setText(rand.nextInt(100000).toString())
         regdate.setText(str.toString())
