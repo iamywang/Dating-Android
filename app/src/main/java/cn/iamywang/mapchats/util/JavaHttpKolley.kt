@@ -147,7 +147,7 @@ class JavaHttpKolley {
                 act.addHisLine(
                     latlngList,
                     color,
-                    array.getJSONObject(  0).getString("time"),
+                    array.getJSONObject(0).getString("time"),
                     array.getJSONObject(array.size - 1).getString("time")
                 )
             }
@@ -291,17 +291,23 @@ class JavaHttpKolley {
         }
     }
 
-    fun getUserList(id: String, act: FriendsListActivity) {
+    fun getUserList(act: FriendsListActivity) {
         Http.get {
-            url = root + "/getHistoryRoadList/?key=all"
+            url = root + "/getUsers/?key=all"
             onSuccess { bytes ->
                 val res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
                 for (i in array.indices) {
                     val userid = array.getJSONObject(i).getString("id")
                     val username = array.getJSONObject(i).getString("name")
-                    val sex = array.getJSONObject(i).getString("sex")
+                    val regdate = array.getJSONObject(i).getString("reg")
                     val online = array.getJSONObject(i).getString("online")
+                    if (online == "online") {
+                        act.list.add(UserListItem(userid, username, regdate, "在线", "0"))
+                    } else {
+                        act.list.add(UserListItem(userid, username, regdate, "离线", "0"))
+                    }
+                    act.setAdapter()
                 }
             }
         }

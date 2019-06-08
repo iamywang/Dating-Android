@@ -3,6 +3,7 @@ package cn.iamywang.mapchats.activity.path
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.view.MenuItem
 import android.widget.ListView
 import cn.iamywang.mapchats.R
@@ -27,6 +28,9 @@ class HistoryPathListActivity : AppCompatActivity(), AdapterView.OnItemClickList
             actionBar.setHomeButtonEnabled(true)
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
+
+        val v = findViewById<ConstraintLayout>(R.id.path_item_view)
+        v.visibility = View.INVISIBLE
 
         val user_id = intent.getStringExtra("id").toString()
         val jhk = JavaHttpKolley()

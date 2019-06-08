@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent(this, HistoryPathListActivity::class.java)
             intent.putExtra("id", this.USERID)
             startActivity(intent)
-            startActivity(intent)
         } else if (id == R.id.nav_record) {
             val intent = Intent(this, PathRecordActivity::class.java)
             intent.putExtra("id", this.USERID)
@@ -135,6 +134,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent(this, FeedBackActivity::class.java)
             intent.putExtra("id", this.USERID)
             intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
+            startActivity(intent)
         } else if (id == R.id.nav_about) {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)

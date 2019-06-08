@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:textColor="@android:color/black" android:textSize="18sp"/>
     <TextView
-            android:text="2019.a.190607v4--beta"
+            android:text="Version 2019.a.190608v4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/about_version" app:layout_constraintStart_toStartOf="parent"
