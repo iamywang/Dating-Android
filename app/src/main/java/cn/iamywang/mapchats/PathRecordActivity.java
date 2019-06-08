@@ -51,11 +51,12 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
     class TimeRecordThread extends Thread {
         private final long starttime = System.currentTimeMillis();
         private Boolean exit = false;
+
         @Override
         public void run() {
             while (!exit) {
                 long time = (System.currentTimeMillis() - starttime) / 1000;
-                TextView timer_text = findViewById(R.id.record_t2);
+                TextView timer_text = findViewById(R.id.record_t4);
                 DecimalFormat df = new DecimalFormat("00");
                 String tmp = df.format(time / 60) + ":" + df.format(time - (time / 60) * 60);
                 timer_text.setText(tmp);
@@ -74,7 +75,9 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
         }
         Intent infointent = getIntent();
         this.USERID = infointent.getStringExtra("id");
-
+        TextView index_view = findViewById(R.id.record_t2);
+        String index_text = "" + this.roadIndex;
+        index_view.setText(index_text);
         mapView = (MapView) findViewById(R.id.record_map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
@@ -91,11 +94,11 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
 
     public void onButtonClick(View view) {
         Button button = findViewById(R.id.record_button);
-        if(this.enbableAddPath){
+        if (this.enbableAddPath) {
             this.enbableAddPath = false;
             button.setText("开始");
             button.setEnabled(false);
-            TextView time_view = findViewById(R.id.record_t2);
+            TextView time_view = findViewById(R.id.record_t4);
             Intent intent = new Intent(PathRecordActivity.this, PathResultActivity.class);
             intent.putExtra("id", this.USERID);
             intent.putExtra("nick", getIntent().getStringExtra("nick"));
@@ -309,9 +312,9 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
         DecimalFormat df = new DecimalFormat("0.000000");
         String loc = df.format(this.lat) + "," + df.format(this.lon);
         DecimalFormat df2 = new DecimalFormat("0.00");
-        this.pathLength += calculateLineDistance(point1,l);
-        String path = df2.format(this.pathLength)+"m";
-        TextView pathText = findViewById(R.id.record_t4);
+        this.pathLength += calculateLineDistance(point1, l);
+        String path = df2.format(this.pathLength) + "m";
+        TextView pathText = findViewById(R.id.record_t6);
         pathText.setText(path);
 
         JavaHttpKolley jhk = new JavaHttpKolley();
@@ -321,10 +324,9 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
             this.roadBool = false;
         }
     }
-    public double calculateLineDistance(LatLng start, LatLng end)
-    {
-        if ((start == null) || (end == null))
-        {
+
+    public double calculateLineDistance(LatLng start, LatLng end) {
+        if ((start == null) || (end == null)) {
             throw new IllegalArgumentException("非法坐标值，不能为null");
         }
         double d1 = 0.01745329251994329D;

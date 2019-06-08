@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content">
                 <ImageView
                         android:layout_width="200dp"
-                        android:layout_height="100dp" app:srcCompat="@mipmap/head" android:id="@+id/user_head"
+                        android:layout_height="100dp" app:srcCompat="@drawable/ic_user" android:id="@+id/user_head"
                         android:layout_weight="1" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp" android:layout_marginRight="8dp"/>
                 <LinearLayout

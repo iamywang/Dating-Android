@@ -20,15 +20,17 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_marginBottom="8dp">
+                    android:layout_height="match_parent" android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp" android:layout_marginTop="16dp">
                 <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp" app:srcCompat="@drawable/ic_my"/>
+                        android:layout_width="48dp"
+                        android:layout_height="48dp" app:srcCompat="@drawable/ic_user"
+                        android:layout_gravity="center_vertical"/>
                 <TextView
                         android:text="注册新用户"
                         android:layout_width="match_parent"
                         android:layout_height="80dp" android:id="@+id/register_tip_0"
-                        android:gravity="center_horizontal|center_vertical" android:textSize="24sp"
+                        android:gravity="center_horizontal|center_vertical" android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"/>
@@ -100,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/register_e10"
                         android:textSize="16sp"
-                        android:minEms="3" android:password="true" android:inputType="textPassword"/>
+                        android:password="true" android:inputType="textPassword" android:minEms="3"/>
                 <TextView
                         android:text="@string/user_passwd"
                         android:layout_width="wrap_content"
@@ -125,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/register_e11"
                             android:textSize="16sp"
-                            android:minEms="3" android:password="true" android:inputType="textPassword"/>
+                            android:password="true" android:inputType="textPassword" android:minEms="3"/>
                 </LinearLayout>
                 <TextView
                         android:text="@string/user_repasswd"

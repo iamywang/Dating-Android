@@ -82,11 +82,6 @@
                 android:theme="@style/AppTheme">
         </activity>
         <activity
-                android:name=".FriendsChatActivity"
-                android:label="@string/title_activity_chat"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
                 android:name=".FriendsListActivity"
                 android:label="@string/title_activity_friend"
                 android:theme="@style/AppTheme">

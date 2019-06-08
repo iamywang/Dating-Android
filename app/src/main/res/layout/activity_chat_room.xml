@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="#EFEFEF" android:id="@+id/tableRow">
         <EditText
-                android:layout_width="300dp"
+                android:layout_width="280dp"
                 android:layout_height="34dp"
                 android:inputType="textPersonName"
                 android:ems="10"

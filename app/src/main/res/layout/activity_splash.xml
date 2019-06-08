@@ -25,7 +25,6 @@
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="0.497"
-            android:contentDescription="@string/LogoDes"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/splash_t1"
             app:layout_constraintVertical_bias="0.564"/>
     <TextView

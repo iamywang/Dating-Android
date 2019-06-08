@@ -254,4 +254,36 @@ class JavaHttpKolley {
         }
     }
 
+    fun getHistoryPathList(id: String, act: HistoryPathListActivity) {
+        Http.post {
+            url = root + "/getHistoryRoadList/"
+            params {
+                "id" - id
+            }
+            onSuccess { bytes ->
+                val res = bytes.toString(Charset.defaultCharset())
+                val array = JSON.parseArray(res)
+                for (i in array.indices) {
+                    val userid = array.getJSONObject(i).getString("id")
+                    val road = array.getJSONObject(i).getString("road")
+                }
+            }
+        }
+    }
+
+    fun getUserList(id: String, act: FriendsListActivity) {
+        Http.get {
+            url = root + "/getHistoryRoadList/?key=all"
+            onSuccess { bytes ->
+                val res = bytes.toString(Charset.defaultCharset())
+                val array = JSON.parseArray(res)
+                for (i in array.indices) {
+                    val userid = array.getJSONObject(i).getString("id")
+                    val username = array.getJSONObject(i).getString("name")
+                    val sex = array.getJSONObject(i).getString("sex")
+                    val online = array.getJSONObject(i).getString("online")
+                }
+            }
+        }
+    }
 }

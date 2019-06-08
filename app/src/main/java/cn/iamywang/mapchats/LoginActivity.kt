@@ -14,20 +14,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(true)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
+//        val actionBar = supportActionBar
+//        if (actionBar != null) {
+//            actionBar.setHomeButtonEnabled(true)
+//            actionBar.setDisplayHomeAsUpEnabled(true)
+//        }
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (item.getItemId() == android.R.id.home) {
+//            this.finish()
+//            return true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     fun onButtonClick(view: View) {
         val user: EditText = findViewById(R.id.editText)

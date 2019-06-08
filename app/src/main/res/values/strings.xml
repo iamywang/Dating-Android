@@ -12,8 +12,6 @@
     <string name="menu_feed">问题反馈</string>
     <string name="menu_about">关于</string>
 
-    <string name="LogoDes">des</string>
-
     <string name="username">用户名</string>
     <string name="passwd">密码</string>
     <string name="login">登录</string>

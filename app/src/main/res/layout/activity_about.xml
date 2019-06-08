@@ -35,35 +35,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/about_text" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/about_version">
         <Button
                 android:text="  程序信息"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/about_b1" android:background="@android:color/white" android:textAlignment="textStart"
-                android:textSize="16sp" style="@android:style/Widget.Material.Button" android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:textSize="16sp" style="@android:style/Widget.Material.Button"
+                android:layout_height="60dp"/>
         <Button
                 android:text="  分享应用"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/about_b2" android:background="@android:color/white" android:textAlignment="textStart"
-                android:textSize="16sp" style="@android:style/Widget.Material.Button" android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:textSize="16sp" style="@android:style/Widget.Material.Button"
+                android:layout_height="60dp"/>
         <Button
                 android:text="  问题反馈"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/about_b3" android:background="@android:color/white" android:textAlignment="textStart"
-                android:textSize="16sp" style="@android:style/Widget.Material.Button" android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:textSize="16sp" style="@android:style/Widget.Material.Button"
+                android:layout_height="60dp"/>
         <Button
                 android:text="  检查更新"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/about_b4" android:background="@android:color/white" android:textAlignment="textStart"
-                android:textSize="16sp" style="@android:style/Widget.Material.Button" android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:textSize="16sp" style="@android:style/Widget.Material.Button"
+                android:layout_height="60dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
