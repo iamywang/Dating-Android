@@ -40,8 +40,15 @@ class ChatRoomActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val v = findViewById<ConstraintLayout>(R.id.msg_item_view)
         v.visibility = View.INVISIBLE
 
-        val jhk = JavaHttpKolley()
-        jhk.getChatMessages(this.USERID, this.REMOTE_ID, this)
+        val thread_this = this
+        val thread = Thread(object : Runnable {
+            override fun run() {
+                val jhk = JavaHttpKolley()
+                jhk.getChatMessages(USERID, REMOTE_ID, thread_this)
+                Thread.sleep(10000)
+            }
+        })
+        thread.start()
     }
 
     fun setAdapter() {
@@ -69,6 +76,4 @@ class ChatRoomActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         jhk.addNewMessage(this.USERID, this.REMOTE_ID, text_view.text.toString(), this)
         text_view.text.clear()
     }
-
-
 }
