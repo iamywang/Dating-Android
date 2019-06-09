@@ -1,6 +1,5 @@
 package cn.iamywang.mapchats.util
 
-import android.content.Intent
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.widget.Toast
@@ -222,7 +221,12 @@ class JavaHttpKolley {
                 // handle data
                 val str = bytes.toString(Charset.defaultCharset())
                 val list = JSON.parseObject(str)
-                act.startMain(list["id"].toString(), list["name"].toString())
+                val lintent = act.intent
+                lintent.putExtra("id", id)
+                lintent.putExtra("name", list["name"].toString())
+                act.setResult(110, lintent)
+                Toast.makeText(act, "登录成功", Toast.LENGTH_LONG).show()
+                act.finish()
             }
         }
     }

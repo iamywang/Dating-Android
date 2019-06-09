@@ -24,6 +24,7 @@ import cn.iamywang.mapchats.activity.misc.AboutActivity
 import cn.iamywang.mapchats.activity.misc.FeedBackActivity
 import cn.iamywang.mapchats.activity.path.HistoryPathListActivity
 import cn.iamywang.mapchats.activity.path.PathRecordActivity
+import cn.iamywang.mapchats.activity.user.LoginActivity
 import cn.iamywang.mapchats.activity.user.UserInfoActivity
 import cn.iamywang.mapchats.util.JavaHttpKolley
 import cn.iamywang.mapchats.util.UserItemAdapter
@@ -48,12 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
-
-        val v = findViewById<ConstraintLayout>(R.id.user_item_view)
-        v.visibility = View.INVISIBLE
-        val jhk = JavaHttpKolley()
-        jhk.getFakeUserMsgList(this)
-        loginUpdate()
+        this.startActivityForResult(Intent(this, LoginActivity::class.java), 109)
     }
 
     fun setAdapter() {
@@ -62,13 +58,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         list_view.setOnItemClickListener(this)
     }
 
-    fun loginUpdate() {
-        val main_intent = intent
-        this.USERID = main_intent.getStringExtra("id").toString()
-        val id_view = findViewById<TextView>(R.id.nav_user_id)
-        val nick_view = findViewById<TextView>(R.id.nav_user_name)
-        id_view.text = this.USERID
-        nick_view.text = main_intent.getStringExtra("name").toString()
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // 在申请码和返回码都符合的时候，接收返回的数据
+        if (requestCode == 109 && resultCode == 110) {
+            val id = findViewById<TextView>(R.id.textView_id)
+            val nick = findViewById<TextView>(R.id.textView_name)
+            if (data != null) {
+                this.USERID = data.getStringExtra("id")
+                id.text = this.USERID
+                nick.text = data.getStringExtra("name")
+            }
+            val v = findViewById<ConstraintLayout>(R.id.user_item_view)
+            v.visibility = View.INVISIBLE
+            val jhk = JavaHttpKolley()
+            jhk.getFakeUserMsgList(this)
+        }
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -119,7 +124,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_record) {
             val intent = Intent(this, PathRecordActivity::class.java)
             intent.putExtra("id", this.USERID)
-            intent.putExtra("nick", findViewById<TextView>(R.id.nav_user_name).text)
+            intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
             startActivity(intent)
         } else if (id == R.id.nav_friends) {
             val intent = Intent(this, FriendsListActivity::class.java)
@@ -134,12 +139,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_feed) {
             val intent = Intent(this, FeedBackActivity::class.java)
             intent.putExtra("id", this.USERID)
-            intent.putExtra("nick", findViewById<TextView>(R.id.nav_user_name).text)
+            intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
             startActivity(intent)
         } else if (id == R.id.nav_share) {
             val intent = Intent(this, FeedBackActivity::class.java)
             intent.putExtra("id", this.USERID)
-            intent.putExtra("nick", findViewById<TextView>(R.id.nav_user_name).text)
+            intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
             startActivity(intent)
         } else if (id == R.id.nav_about) {
             val intent = Intent(this, AboutActivity::class.java)

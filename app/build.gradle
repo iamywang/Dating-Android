@@ -10,8 +10,8 @@ android {
         applicationId "cn.iamywang.mapchats"
         minSdkVersion 24
         targetSdkVersion 26
-        versionCode 20190608
-        versionName "2019.a.190608v4"
+        versionCode 20190609
+        versionName "2019.a.190609v2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

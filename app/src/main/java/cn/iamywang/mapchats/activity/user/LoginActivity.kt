@@ -7,12 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
-import cn.iamywang.mapchats.MainActivity
 import cn.iamywang.mapchats.R
 import cn.iamywang.mapchats.util.JavaHttpKolley
 import com.ohmerhe.kolley.request.Http
-import java.nio.charset.Charset
 
 
 class LoginActivity : AppCompatActivity() {
@@ -54,20 +51,10 @@ class LoginActivity : AppCompatActivity() {
         val pswd: EditText = findViewById(R.id.editText2)
         Http.init(this)
         val jhk = JavaHttpKolley()
-        jhk.loginApp(user.text.toString(), pswd.text.toString(), this)
+        jhk.loginApp(user.text.toString(), pswd.text.toString(),this)
     }
 
     fun onButtonClick1(view: View) {
         startActivity(Intent(this, RegisterActivity::class.java))
-    }
-
-    fun startMain(id: String, name: String) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("id", id)
-        intent.putExtra("name", name)
-        startActivity(intent)
-        this.finish()
-        Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show()
-
     }
 }
