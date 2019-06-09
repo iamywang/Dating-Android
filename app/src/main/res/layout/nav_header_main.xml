@@ -27,10 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
-                android:id="@+id/textView_name" android:textSize="18sp" android:textColor="@android:color/white"
+                android:id="@+id/nav_user_name" android:textSize="18sp" android:textColor="@android:color/white"
                 android:textStyle="bold"/>
         <TextView
-                android:id="@+id/textView_id"
+                android:id="@+id/nav_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp" android:textColor="@android:color/white"/>

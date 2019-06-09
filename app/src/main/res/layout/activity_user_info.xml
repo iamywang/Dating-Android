@@ -309,7 +309,7 @@
                                 android:textSize="16sp"
                                 android:gravity="center_vertical"/>
                         <TextView
-                                android:text="@string/user_online"
+                                android:text="@string/user_regdate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/user_t7"
@@ -335,7 +335,7 @@
                                 android:textSize="16sp"
                                 android:gravity="center_vertical"/>
                         <TextView
-                                android:text="@string/user_regdate"
+                                android:text="上次登录时间"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/user_t8"

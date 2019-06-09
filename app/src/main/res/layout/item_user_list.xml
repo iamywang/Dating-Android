@@ -2,57 +2,69 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="wrap_content"
-                                             android:layout_height="80dp"
-                                             android:id="@+id/user_item_view">
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+>
 
-    <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp" app:srcCompat="@drawable/ic_user"
-            android:id="@+id/imageView_user_item" android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/user_item_l1" android:layout_marginBottom="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
-    />
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_item_l1" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView_user_item" app:layout_constraintEnd_toEndOf="parent">
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/friends_list">
+    </ListView>
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp" android:id="@+id/user_item_view" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp" app:srcCompat="@drawable/ic_user_color"
+                android:id="@+id/user_item_sex"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"/>
         <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            <TextView
-                    android:layout_width="230dp"
-                    android:layout_height="40dp" android:id="@+id/user_item_name"
-                    android:textColor="@android:color/black" android:gravity="center_vertical"
-                    android:textSize="18sp" android:textStyle="bold"/>
-            <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp" android:id="@+id/user_item_time"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1" android:textSize="12sp"
-                    android:layout_gravity="center_vertical"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/user_item_l1"
+                app:layout_constraintStart_toEndOf="@+id/user_item_sex"
+                android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="24dp" android:id="@+id/user_item_name"
+                        android:textColor="@android:color/black" android:gravity="center_vertical"
+                        android:textSize="16sp" android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="24dp" android:id="@+id/user_item_time"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="1" android:textSize="13sp"
+                        android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="260dp"
+                        android:layout_height="24dp" android:id="@+id/user_item_msg"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1" android:textSize="13sp"/>
+                <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" android:id="@+id/user_item_num"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="1" android:background="@android:color/darker_gray"
+                        android:textColor="@android:color/white"
+                />
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            <TextView
-                    android:layout_width="250dp"
-                    android:layout_height="40dp" android:id="@+id/user_item_msg"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp" android:layout_weight="1"/>
-            <TextView
-                    android:layout_width="30dp"
-                    android:layout_height="20dp" android:id="@+id/user_item_num"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1" android:background="@android:color/darker_gray"
-                    android:textColor="@android:color/white"
-            />
-        </LinearLayout>
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

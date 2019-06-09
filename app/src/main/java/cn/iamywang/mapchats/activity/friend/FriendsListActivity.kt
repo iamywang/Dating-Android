@@ -16,6 +16,7 @@ import java.util.*
 class FriendsListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     val list = LinkedList<UserListItem>()
     val mAdapter = UserItemAdapter(list, this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friends_list)
@@ -30,17 +31,6 @@ class FriendsListActivity : AppCompatActivity(), AdapterView.OnItemClickListener
 
         val jhk = JavaHttpKolley()
         jhk.getUserList(this)
-
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","3"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","4"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
-//        list.add(UserListItem("0","测试用户","我有一条消息","00:00","0"));
     }
 
     fun setAdapter() {

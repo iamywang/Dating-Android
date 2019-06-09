@@ -1,8 +1,10 @@
 package cn.iamywang.mapchats.util
 
+import android.content.Intent
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.widget.Toast
+import cn.iamywang.mapchats.MainActivity
 import cn.iamywang.mapchats.activity.friend.FriendsListActivity
 import cn.iamywang.mapchats.activity.friend.LocationShareActivity
 import cn.iamywang.mapchats.activity.path.HisrotyLocationActivity
@@ -31,7 +33,7 @@ class JavaHttpKolley {
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append("").append(month).append("").append(day).append(" ").append(hou).append(":")
+        str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
             url = root + "/addLocation/"
@@ -179,7 +181,7 @@ class JavaHttpKolley {
         val min = String.format("%0" + 2 + "d", minute)
         val sec = String.format("%0" + 2 + "d", second)
         val str = StringBuffer("")
-        str.append(year).append("").append(month).append("").append(day).append(" ").append(hou).append(":")
+        str.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
             .append(min).append(":").append(sec)
         Http.post {
             url = root + "/addLocation/"
@@ -196,22 +198,31 @@ class JavaHttpKolley {
     }
 
     fun loginApp(id: String, passwd: String, act: LoginActivity) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+        val hou = String.format("%0" + 2 + "d", hour)
+        val min = String.format("%0" + 2 + "d", minute)
+        val sec = String.format("%0" + 2 + "d", second)
+        val date = StringBuffer("")
+        date.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
+            .append(min).append(":").append(sec)
         Http.post {
             url = root + "/login/"
             params {
                 "id" - id
                 "password" - passwd
+                "date" - date.toString()
             }
             onSuccess { bytes ->
                 // handle data
                 val str = bytes.toString(Charset.defaultCharset())
                 val list = JSON.parseObject(str)
-                val lintent = act.intent
-                lintent.putExtra("id", id)
-                lintent.putExtra("name", list["name"].toString())
-                act.setResult(2, lintent)
-                Toast.makeText(act, "登录成功", Toast.LENGTH_LONG).show()
-                act.finish()
+                act.startMain(list["id"].toString(), list["name"].toString())
             }
         }
     }
@@ -248,14 +259,15 @@ class JavaHttpKolley {
         }
     }
 
-    fun setOffline(id: String) {
+    fun setOffline(id: String, act: MainActivity) {
         Http.post {
             url = root + "/setOffline/"
             params {
                 "id" - id
             }
             onSuccess {
-
+                act.finish()
+                System.exit(0)
             }
         }
     }
@@ -300,13 +312,30 @@ class JavaHttpKolley {
                 for (i in array.indices) {
                     val userid = array.getJSONObject(i).getString("id")
                     val username = array.getJSONObject(i).getString("name")
-                    val regdate = array.getJSONObject(i).getString("reg")
                     val online = array.getJSONObject(i).getString("online")
+                    val sex = array.getJSONObject(i).getString("sex")
                     if (online == "online") {
-                        act.list.add(UserListItem(userid, username, regdate, "在线", "0"))
+                        act.list.add(UserListItem(userid, username, sex, "[在线]", "", "0"))
                     } else {
-                        act.list.add(UserListItem(userid, username, regdate, "离线", "0"))
+                        act.list.add(UserListItem(userid, username, sex, "[离线]", "", "0"))
                     }
+                    act.setAdapter()
+                }
+            }
+        }
+    }
+
+    fun getFakeUserMsgList(act: MainActivity) {
+        Http.get {
+            url = root + "/getUsers/?key=all"
+            onSuccess { bytes ->
+                val res = bytes.toString(Charset.defaultCharset())
+                val array = JSON.parseArray(res)
+                for (i in array.indices) {
+                    val userid = array.getJSONObject(i).getString("id")
+                    val username = array.getJSONObject(i).getString("name")
+                    val sex = array.getJSONObject(i).getString("sex")
+                    act.list.add(UserListItem(userid, username, sex, "这是一条消息", "13:42", "0"))
                     act.setAdapter()
                 }
             }

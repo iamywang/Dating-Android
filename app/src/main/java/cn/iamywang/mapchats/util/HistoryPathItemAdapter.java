@@ -1,5 +1,6 @@
 package cn.iamywang.mapchats.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,9 +35,10 @@ public class HistoryPathItemAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("ViewHolder")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.activity_history_path_list, parent, false);
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_path_list, parent, false);
         TextView path_item_time = (TextView) convertView.findViewById(R.id.path_item_time);
         TextView path_item_tag = (TextView) convertView.findViewById(R.id.path_item_tag);
         TextView path_item_loc = (TextView) convertView.findViewById(R.id.path_item_loc);

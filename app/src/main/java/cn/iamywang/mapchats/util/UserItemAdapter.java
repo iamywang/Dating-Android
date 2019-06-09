@@ -1,10 +1,13 @@
 package cn.iamywang.mapchats.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.iamywang.mapchats.R;
 
@@ -34,21 +37,30 @@ public class UserItemAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("ViewHolder")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.activity_friends_list, parent, false);
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_user_list, parent, false);
+        ImageView head_image = (ImageView) convertView.findViewById(R.id.user_item_sex);
         TextView user_item_name = (TextView) convertView.findViewById(R.id.user_item_name);
         TextView user_item_msg = (TextView) convertView.findViewById(R.id.user_item_msg);
         TextView user_item_time = (TextView) convertView.findViewById(R.id.user_item_time);
         TextView user_item_num = (TextView) convertView.findViewById(R.id.user_item_num);
-        user_item_name.setText(mData.get(position).getUser_name());
+
+//        String name_and_id = mData.get(position).getUser_name() + "（ID：" + mData.get(position).getUser_id() + "）";
+        String name_and_id = mData.get(position).getUser_name();
+        user_item_name.setText(name_and_id);
         user_item_msg.setText(mData.get(position).getUser_msg());
         user_item_time.setText(mData.get(position).getUser_time());
+        if (mData.get(position).getUser_sex().equals("男")) {
+            head_image.setImageResource(R.drawable.ic_user_color);
+        } else {
+            head_image.setImageResource(R.drawable.ic_user_color_2);
+        }
         if (Integer.parseInt(mData.get(position).getUser_num()) == 0) {
             user_item_num.setVisibility(View.INVISIBLE);
         } else {
             user_item_num.setText(mData.get(position).getUser_num());
-
         }
         return convertView;
     }

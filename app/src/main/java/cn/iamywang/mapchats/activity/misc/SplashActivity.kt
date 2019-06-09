@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Message
 import cn.iamywang.mapchats.MainActivity
 import cn.iamywang.mapchats.R
+import cn.iamywang.mapchats.activity.user.LoginActivity
 import cn.iamywang.mapchats.util.UIHandler
 
 class SplashActivity : AppCompatActivity() {
@@ -69,7 +70,7 @@ class SplashActivity : AppCompatActivity() {
 
                     // 正常跳转到登录界面
                     MSG_LAUNCH -> {
-                        activity.startActivity(Intent(activity, MainActivity::class.java))
+                        activity.startActivity(Intent(activity, LoginActivity::class.java))
                         activity.finish()
                     }
                 }

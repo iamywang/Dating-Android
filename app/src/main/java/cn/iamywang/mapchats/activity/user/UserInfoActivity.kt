@@ -59,16 +59,16 @@ class UserInfoActivity : AppCompatActivity() {
                 val birth: EditText = findViewById(R.id.user_e4)
                 val height: EditText = findViewById(R.id.user_e5)
                 val weight: EditText = findViewById(R.id.user_e6)
-                val online: TextView = findViewById(R.id.user_e7)
-                val regdate: TextView = findViewById(R.id.user_e8)
+                val regdate: TextView = findViewById(R.id.user_e7)
+                val logdate: TextView = findViewById(R.id.user_e8)
                 head_name.setText(list["name"].toString())
                 nick.setText(list["name"].toString())
                 sex.setText(list["sex"].toString())
                 birth.setText(list["birth"].toString())
                 height.setText(list["height"].toString())
                 weight.setText(list["weight"].toString())
-                online.setText(list["online"].toString())
                 regdate.setText(list["reg"].toString())
+                logdate.setText(list["login"].toString())
             }
         }
     }
