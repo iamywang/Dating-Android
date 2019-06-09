@@ -4,10 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
-import cn.iamywang.mapchats.MainActivity
+import cn.iamywang.mapchats.activity.user.MainActivity
 import cn.iamywang.mapchats.R
-import cn.iamywang.mapchats.activity.user.LoginActivity
-import cn.iamywang.mapchats.util.UIHandler
+import cn.iamywang.mapchats.util.misc.UIHandler
 
 class SplashActivity : AppCompatActivity() {
 

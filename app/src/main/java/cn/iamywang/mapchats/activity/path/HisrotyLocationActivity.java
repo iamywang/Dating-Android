@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 import cn.iamywang.mapchats.R;
-import cn.iamywang.mapchats.util.JavaHttpKolley;
+import cn.iamywang.mapchats.util.network.JavaHttpKolley;
 import com.amap.api.maps.*;
 import com.amap.api.maps.model.*;
 

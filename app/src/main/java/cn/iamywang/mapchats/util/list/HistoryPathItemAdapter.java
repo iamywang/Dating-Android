@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats.util;
+package cn.iamywang.mapchats.util.list;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import cn.iamywang.mapchats.R;
+import cn.iamywang.mapchats.util.list.HistoryPathItem;
 
 import java.util.LinkedList;
 

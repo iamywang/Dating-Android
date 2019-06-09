@@ -8,9 +8,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import cn.iamywang.mapchats.R
-import cn.iamywang.mapchats.util.JavaHttpKolley
-import cn.iamywang.mapchats.util.UserItemAdapter
-import cn.iamywang.mapchats.util.UserListItem
+import cn.iamywang.mapchats.util.network.JavaHttpKolley
+import cn.iamywang.mapchats.util.list.UserItemAdapter
+import cn.iamywang.mapchats.util.list.UserListItem
 import java.util.*
 
 class FriendsListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {

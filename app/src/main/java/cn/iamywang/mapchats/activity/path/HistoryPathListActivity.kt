@@ -7,9 +7,9 @@ import android.support.constraint.ConstraintLayout
 import android.view.MenuItem
 import android.widget.ListView
 import cn.iamywang.mapchats.R
-import cn.iamywang.mapchats.util.HistoryPathItem
-import cn.iamywang.mapchats.util.HistoryPathItemAdapter
-import cn.iamywang.mapchats.util.JavaHttpKolley
+import cn.iamywang.mapchats.util.list.HistoryPathItem
+import cn.iamywang.mapchats.util.list.HistoryPathItemAdapter
+import cn.iamywang.mapchats.util.network.JavaHttpKolley
 import java.util.*
 import android.widget.AdapterView
 import android.view.View

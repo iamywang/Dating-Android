@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats.util
+package cn.iamywang.mapchats.util.list
 
 class UserListItem constructor(id: String, name: String, sex: String, msg: String, time: String, num: String) {
     var user_id: String = ""

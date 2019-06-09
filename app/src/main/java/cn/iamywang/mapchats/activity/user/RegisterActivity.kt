@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import cn.iamywang.mapchats.R
-import cn.iamywang.mapchats.util.JavaHttpKolley
+import cn.iamywang.mapchats.util.network.JavaHttpKolley
 import com.ohmerhe.kolley.request.Http
 import kotlin.random.Random
 

@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats
+package cn.iamywang.mapchats.activity.user
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +17,7 @@ import android.widget.ListView
 
 import android.widget.TextView
 import android.widget.Toast
+import cn.iamywang.mapchats.R
 import cn.iamywang.mapchats.activity.friend.ChatRoomActivity
 import cn.iamywang.mapchats.activity.friend.FriendsListActivity
 import cn.iamywang.mapchats.activity.friend.LocationShareActivity
@@ -24,11 +25,9 @@ import cn.iamywang.mapchats.activity.misc.AboutActivity
 import cn.iamywang.mapchats.activity.misc.FeedBackActivity
 import cn.iamywang.mapchats.activity.path.HistoryPathListActivity
 import cn.iamywang.mapchats.activity.path.PathRecordActivity
-import cn.iamywang.mapchats.activity.user.LoginActivity
-import cn.iamywang.mapchats.activity.user.UserInfoActivity
-import cn.iamywang.mapchats.util.JavaHttpKolley
-import cn.iamywang.mapchats.util.UserItemAdapter
-import cn.iamywang.mapchats.util.UserListItem
+import cn.iamywang.mapchats.util.network.JavaHttpKolley
+import cn.iamywang.mapchats.util.list.UserItemAdapter
+import cn.iamywang.mapchats.util.list.UserListItem
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -45,7 +44,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name)
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
+            R.string.app_name,
+            R.string.app_name
+        )
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)

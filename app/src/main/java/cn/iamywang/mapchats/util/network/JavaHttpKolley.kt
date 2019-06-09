@@ -1,20 +1,26 @@
-package cn.iamywang.mapchats.util
+package cn.iamywang.mapchats.util.network
 
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.widget.Toast
-import cn.iamywang.mapchats.MainActivity
+import cn.iamywang.mapchats.activity.friend.ChatRoomActivity
+import cn.iamywang.mapchats.activity.user.MainActivity
 import cn.iamywang.mapchats.activity.friend.FriendsListActivity
 import cn.iamywang.mapchats.activity.friend.LocationShareActivity
 import cn.iamywang.mapchats.activity.path.HisrotyLocationActivity
 import cn.iamywang.mapchats.activity.path.HistoryPathListActivity
 import cn.iamywang.mapchats.activity.user.LoginActivity
 import cn.iamywang.mapchats.activity.user.RegisterActivity
+import cn.iamywang.mapchats.util.list.HistoryPathItem
+import cn.iamywang.mapchats.util.list.MessageListItem
+import cn.iamywang.mapchats.util.list.UserListItem
 import com.alibaba.fastjson.JSON
 import com.amap.api.maps.model.LatLng
 import com.ohmerhe.kolley.request.Http
 import java.lang.Double
 import java.nio.charset.Charset
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 class JavaHttpKolley {
@@ -319,9 +325,27 @@ class JavaHttpKolley {
                     val online = array.getJSONObject(i).getString("online")
                     val sex = array.getJSONObject(i).getString("sex")
                     if (online == "online") {
-                        act.list.add(UserListItem(userid, username, sex, "[在线]", "", "0"))
+                        act.list.add(
+                            UserListItem(
+                                userid,
+                                username,
+                                sex,
+                                "[在线]",
+                                "",
+                                "0"
+                            )
+                        )
                     } else {
-                        act.list.add(UserListItem(userid, username, sex, "[离线]", "", "0"))
+                        act.list.add(
+                            UserListItem(
+                                userid,
+                                username,
+                                sex,
+                                "[离线]",
+                                "",
+                                "0"
+                            )
+                        )
                     }
                     act.setAdapter()
                 }
@@ -339,9 +363,74 @@ class JavaHttpKolley {
                     val userid = array.getJSONObject(i).getString("id")
                     val username = array.getJSONObject(i).getString("name")
                     val sex = array.getJSONObject(i).getString("sex")
-                    act.list.add(UserListItem(userid, username, sex, "这是一条消息", "13:42", "0"))
+                    act.list.add(
+                        UserListItem(
+                            userid,
+                            username,
+                            sex,
+                            "点击开始聊天",
+                            "",
+                            "0"
+                        )
+                    )
                     act.setAdapter()
                 }
+            }
+        }
+    }
+
+    fun getChatMessages(local_id: String, remote_id: String, act: ChatRoomActivity) {
+        Http.post {
+            url = root + "/getUserMessages/"
+            params {
+                "id1" - local_id
+                "id2" - remote_id
+            }
+            onSuccess { bytes ->
+                val res = bytes.toString(Charset.defaultCharset())
+                val array = JSON.parseArray(res)
+                act.list.clear()
+                act.setAdapter()
+                for (i in array.indices) {
+                    val id1 = array.getJSONObject(i).getString("id1")
+                    val nick1 = array.getJSONObject(i).getString("nick1")
+                    val sex = array.getJSONObject(i).getString("sex")
+                    val msg = array.getJSONObject(i).getString("msg")
+                    val time = array.getJSONObject(i).getString("time")
+                    val read = array.getJSONObject(i).getString("read")
+                    act.list.add(MessageListItem(id1, nick1, sex, msg, time, read))
+                    act.setAdapter()
+                }
+            }
+        }
+    }
+
+    fun addNewMessage(local_id: String, remote_id: String, msg: String, act: ChatRoomActivity) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+        val hou = String.format("%0" + 2 + "d", hour)
+        val min = String.format("%0" + 2 + "d", minute)
+        val sec = String.format("%0" + 2 + "d", second)
+        val date = StringBuffer("")
+        date.append(year).append(".").append(month).append(".").append(day).append(" ").append(hou).append(":")
+            .append(min).append(":").append(sec)
+        Http.post {
+            url = root + "/addMessage/"
+            params {
+                "id1" - local_id
+                "id2" - remote_id
+                "time" - date.toString()
+                "location" - "济南"
+                "model" - "Android"
+                "msg" - msg
+            }
+            onSuccess {
+                getChatMessages(local_id, remote_id, act)
             }
         }
     }

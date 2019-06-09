@@ -6,22 +6,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.friend.ChatRoomActivity">
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-    </ScrollView>
+    <include android:layout_width="match_parent" android:layout_height="0dp" layout="@layout/item_msg_list"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintBottom_toTopOf="@+id/chat_layout" android:layout_marginBottom="8dp"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
-    >
+            android:id="@+id/chat_layout">
         <EditText
-                android:layout_width="300dp"
+                android:layout_width="260dp"
                 android:layout_height="36dp"
                 android:inputType="textPersonName"
                 android:ems="10"
@@ -31,6 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp" app:srcCompat="@drawable/ic_send" android:id="@+id/chat_send"
                 android:layout_weight="1" style="@android:style/Widget.Material.Button.Borderless"
-                android:background="@color/split_bar"/>
+                android:background="@color/split_bar" android:onClick="sendMsg"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package cn.iamywang.mapchats.util
+package cn.iamywang.mapchats.util.list
 
 class HistoryPathItem constructor(user_id: String, path_id: String, start_time: String, start_loc: String) {
     var user_id: String = ""
