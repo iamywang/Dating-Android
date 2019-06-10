@@ -23,7 +23,7 @@ import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 class JavaHttpKolley {
-    val root = "http://41ac8bfa.ngrok.io"
+    val root = "http://39.105.44.114:58000"
 
     fun addLocation(id: String, loc: String, act: LocationShareActivity) {
         val calendar = Calendar.getInstance()
@@ -359,6 +359,10 @@ class JavaHttpKolley {
             onSuccess { bytes ->
                 val res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
+                act.list.add(
+                    UserListItem("0", "聊天室", "room", "点击进入聊天室", "", "0")
+                )
+                act.setAdapter()
                 for (i in array.indices) {
                     val userid = array.getJSONObject(i).getString("id")
                     val username = array.getJSONObject(i).getString("name")

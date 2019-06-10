@@ -15,7 +15,7 @@ import java.nio.charset.Charset
 
 class UserInfoActivity : AppCompatActivity() {
 
-    val root = "http://41ac8bfa.ngrok.io"
+    val root = "http://39.105.44.114:58000"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +65,9 @@ class UserInfoActivity : AppCompatActivity() {
                 head_name.setText(list["name"].toString())
                 nick.setText(list["name"].toString())
                 sex.setText(list["sex"].toString())
-                if (list["sex"].toString() == "男") {
+                if (info_id == "1") {
+                    head_img.setImageResource(R.drawable.ic_user_admin)
+                } else if (list["sex"].toString() == "男") {
                     head_img.setImageResource(R.drawable.ic_user_color)
                 } else if (list["sex"].toString() == "女") {
                     head_img.setImageResource(R.drawable.ic_user_color_2)

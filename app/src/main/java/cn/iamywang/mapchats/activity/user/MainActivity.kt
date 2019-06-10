@@ -29,7 +29,7 @@ import cn.iamywang.mapchats.util.list.UserListItem
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    AdapterView.OnItemClickListener{
+    AdapterView.OnItemClickListener {
     private var USERID = ""
     private var exitTime = System.currentTimeMillis()
     val list = LinkedList<UserListItem>()
@@ -72,7 +72,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this.USERID = data.getStringExtra("id")
                 id.text = this.USERID
                 nick.text = data.getStringExtra("name")
-                if (data.getStringExtra("sex") == "男") {
+                if (this.USERID == "1") {
+                    head_img.setImageResource(R.drawable.ic_user_admin)
+                } else if (data.getStringExtra("sex") == "男") {
                     head_img.setImageResource(R.drawable.ic_user_color)
                 } else if (data.getStringExtra("sex") == "女") {
                     head_img.setImageResource(R.drawable.ic_user_color_2)

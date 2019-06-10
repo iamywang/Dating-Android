@@ -174,7 +174,7 @@ public class LocationShareActivity extends AppCompatActivity implements Location
                     addCircle(location, amapLocation.getAccuracy());//添加定位精度圆
                     addMarker(location);//添加定位图标
                     mSensorHelper.setCurrentMarker(mLocMarker);//定位图标旋转
-                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
+                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
                 } else {
                     mCircle.setCenter(location);
                     mCircle.setRadius(amapLocation.getAccuracy());
@@ -183,6 +183,10 @@ public class LocationShareActivity extends AppCompatActivity implements Location
                 }
             }
         }
+        JavaHttpKolley jkh = new JavaHttpKolley();
+        aMap.getMapScreenMarkers().clear();
+        jkh.getHisMarker(this.USERID, this);
+        jkh.getOnlineUser(this.USERID, this);
     }
 
     /**
@@ -199,7 +203,7 @@ public class LocationShareActivity extends AppCompatActivity implements Location
             //设置为高精度定位模式
             mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Device_Sensors);
             //设置定位参数
-            mLocationOption.setInterval(100000);
+            mLocationOption.setInterval(10000);
             mlocationClient.setLocationOption(mLocationOption);
             // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
             // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
