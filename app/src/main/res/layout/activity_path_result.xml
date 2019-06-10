@@ -21,7 +21,7 @@
                     android:layout_marginBottom="8dp">
                 <ImageView
                         android:layout_width="160dp"
-                        android:layout_height="80dp" app:srcCompat="@drawable/ic_user"
+                        android:layout_height="80dp" app:srcCompat="@drawable/ic_user_color"
                         android:layout_weight="1"/>
                 <LinearLayout
                         android:orientation="vertical"

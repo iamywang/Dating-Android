@@ -129,7 +129,7 @@ public class HisrotyLocationActivity extends AppCompatActivity {
                 R.mipmap.run)));
         pathMarkerOptions.anchor(0.5f, 0.5f);
         pathMarkerOptions.position(list.get(0));
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 11));
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 18));
         Marker pathMarker = aMap.addMarker(pathMarkerOptions);
 
         class PathReviewThread extends Thread {
@@ -147,7 +147,7 @@ public class HisrotyLocationActivity extends AppCompatActivity {
                     for (int i = 1; i < list.size(); i++) {
                         Thread.sleep(400);
                         pathMarker.setPosition(list.get(i));
-                        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(i), 16));
+                        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(i), 18));
                     }
                     Thread.sleep(400);
                 } catch (InterruptedException e) {

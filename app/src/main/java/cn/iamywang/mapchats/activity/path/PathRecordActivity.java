@@ -44,7 +44,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
     private String USERID;
 
     private Random rand = new Random();
-    private int roadIndex = rand.nextInt(1000);//路径编号
+    private int roadIndex = rand.nextInt(9000) + 1000;//路径编号
     private Boolean roadBool = true;//是否首次添加
     private Boolean enbableAddPath = false;//是否允许记录轨迹
     private Double lat, lon;//记录当前位置

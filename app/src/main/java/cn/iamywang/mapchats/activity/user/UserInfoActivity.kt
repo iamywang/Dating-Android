@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import cn.iamywang.mapchats.R
@@ -14,7 +15,7 @@ import java.nio.charset.Charset
 
 class UserInfoActivity : AppCompatActivity() {
 
-    val root = "http://10.27.246.15"
+    val root = "http://41ac8bfa.ngrok.io"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,6 @@ class UserInfoActivity : AppCompatActivity() {
         id.setText(info_id)
         loc.setText(info_loc)
         getInfo(info_id)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -54,6 +54,7 @@ class UserInfoActivity : AppCompatActivity() {
                 val str = bytes.toString(Charset.defaultCharset())
                 val list = JSON.parseObject(str)
                 val head_name: TextView = findViewById(R.id.user_t_name)
+                val head_img: ImageView = findViewById(R.id.user_head)
                 val nick: EditText = findViewById(R.id.user_e2)
                 val sex: EditText = findViewById(R.id.user_e3)
                 val birth: EditText = findViewById(R.id.user_e4)
@@ -64,6 +65,11 @@ class UserInfoActivity : AppCompatActivity() {
                 head_name.setText(list["name"].toString())
                 nick.setText(list["name"].toString())
                 sex.setText(list["sex"].toString())
+                if (list["sex"].toString() == "男") {
+                    head_img.setImageResource(R.drawable.ic_user_color)
+                } else if (list["sex"].toString() == "女") {
+                    head_img.setImageResource(R.drawable.ic_user_color_2)
+                }
                 birth.setText(list["birth"].toString())
                 height.setText(list["height"].toString())
                 weight.setText(list["weight"].toString())
@@ -82,7 +88,8 @@ class UserInfoActivity : AppCompatActivity() {
         val birth: EditText = findViewById(R.id.user_e4)
         val height: EditText = findViewById(R.id.user_e5)
         val weight: EditText = findViewById(R.id.user_e6)
-        val regdate: TextView = findViewById(R.id.user_e8)
+        val regdate: TextView = findViewById(R.id.user_e7)
+        val logdate: TextView = findViewById(R.id.user_e8)
         Http.post {
             url = root + "/updateUser/"
             params {
@@ -93,7 +100,7 @@ class UserInfoActivity : AppCompatActivity() {
                 "height" - height.text.toString()
                 "weight" - weight.text.toString()
                 "reg" - regdate.text.toString()
-                "login" - regdate.text.toString()
+                "login" - logdate.text.toString()
             }
             onSuccess { bytes ->
                 // handle data

@@ -19,12 +19,11 @@ import com.amap.api.maps.model.LatLng
 import com.ohmerhe.kolley.request.Http
 import java.lang.Double
 import java.nio.charset.Charset
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 class JavaHttpKolley {
-    val root = "http://10.27.246.15"
+    val root = "http://41ac8bfa.ngrok.io"
 
     fun addLocation(id: String, loc: String, act: LocationShareActivity) {
         val calendar = Calendar.getInstance()
@@ -230,6 +229,7 @@ class JavaHttpKolley {
                 val lintent = act.intent
                 lintent.putExtra("id", id)
                 lintent.putExtra("name", list["name"].toString())
+                lintent.putExtra("sex", list["sex"].toString())
                 act.setResult(110, lintent)
                 Toast.makeText(act, "登录成功", Toast.LENGTH_LONG).show()
                 act.finish()

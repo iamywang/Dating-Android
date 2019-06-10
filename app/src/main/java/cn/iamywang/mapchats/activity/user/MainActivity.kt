@@ -6,17 +6,15 @@ import android.support.constraint.ConstraintLayout
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
+import android.widget.*
 
-import android.widget.TextView
-import android.widget.Toast
 import cn.iamywang.mapchats.R
 import cn.iamywang.mapchats.activity.friend.ChatRoomActivity
 import cn.iamywang.mapchats.activity.friend.FriendsListActivity
@@ -31,7 +29,7 @@ import cn.iamywang.mapchats.util.list.UserListItem
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    AdapterView.OnItemClickListener {
+    AdapterView.OnItemClickListener{
     private var USERID = ""
     private var exitTime = System.currentTimeMillis()
     val list = LinkedList<UserListItem>()
@@ -44,7 +42,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
+        val toggle = ActionBarDrawerToggle(
+            this, drawer, toolbar,
             R.string.app_name,
             R.string.app_name
         )
@@ -52,6 +51,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
         this.startActivityForResult(Intent(this, LoginActivity::class.java), 109)
+        val v = findViewById<ConstraintLayout>(R.id.user_item_view)
+        v.visibility = View.INVISIBLE
     }
 
     fun setAdapter() {
@@ -66,13 +67,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (requestCode == 109 && resultCode == 110) {
             val id = findViewById<TextView>(R.id.textView_id)
             val nick = findViewById<TextView>(R.id.textView_name)
+            val head_img = findViewById<ImageView>(R.id.nav_head_image)
             if (data != null) {
                 this.USERID = data.getStringExtra("id")
                 id.text = this.USERID
                 nick.text = data.getStringExtra("name")
+                if (data.getStringExtra("sex") == "男") {
+                    head_img.setImageResource(R.drawable.ic_user_color)
+                } else if (data.getStringExtra("sex") == "女") {
+                    head_img.setImageResource(R.drawable.ic_user_color_2)
+                }
             }
-            val v = findViewById<ConstraintLayout>(R.id.user_item_view)
-            v.visibility = View.INVISIBLE
             val jhk = JavaHttpKolley()
             jhk.getFakeUserMsgList(this)
         }
@@ -104,6 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             val jhk = JavaHttpKolley()
             jhk.setOffline(this.USERID, this)
+            finish()
         }
     }
 
