@@ -1,7 +1,9 @@
 package cn.iamywang.mapchats.activity.path;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -106,8 +108,8 @@ public class HisrotyLocationActivity extends AppCompatActivity {
     public void addHisLine(List<LatLng> list, int color, String start, String end) {
         PolylineOptions options = new PolylineOptions();
         options.addAll(list);
-        options.width(15);
-        options.color(color);
+        options.width(12);
+        options.color(Color.argb(255, 0, 128, 255));
         options.lineJoinType(PolylineOptions.LineJoinType.LineJoinRound);
         options.lineCapType(PolylineOptions.LineCapType.LineCapRound);
 //        options.setDottedLine(true);
@@ -158,7 +160,7 @@ public class HisrotyLocationActivity extends AppCompatActivity {
         }
         PathReviewThread t = new PathReviewThread(list, pathMarker);
         t.start();
-        aMap.addMarker(new MarkerOptions().position(list.get(list.size() - 1)).title("终点").snippet(end));
+        aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).position(list.get(list.size() - 1)).title("终点").snippet(end));
     }
 
     public double calculateLineDistance(LatLng start, LatLng end) {

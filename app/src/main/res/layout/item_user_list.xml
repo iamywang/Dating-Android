@@ -44,7 +44,7 @@
                 <TextView
                         android:layout_width="50dp"
                         android:layout_height="24dp" android:id="@+id/user_item_time"
-                        android:gravity="center_horizontal|center_vertical"
+                        android:gravity="right|center_vertical"
                         android:layout_weight="1" android:textSize="13sp"
                         android:layout_gravity="center_vertical"/>
             </LinearLayout>
@@ -61,7 +61,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp" android:id="@+id/user_item_num"
                         android:gravity="center_horizontal|center_vertical"
-                        android:layout_weight="1" android:background="@android:color/darker_gray"
+                        android:layout_weight="1" android:background="@android:color/holo_red_light"
                         android:textColor="@android:color/white"
                 />
             </LinearLayout>

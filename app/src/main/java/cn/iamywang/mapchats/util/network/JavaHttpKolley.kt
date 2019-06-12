@@ -1,8 +1,10 @@
 package cn.iamywang.mapchats.util.network
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.icu.util.Calendar
 import android.widget.Toast
+import cn.iamywang.mapchats.R
 import cn.iamywang.mapchats.activity.friend.ChatRoomActivity
 import cn.iamywang.mapchats.activity.user.MainActivity
 import cn.iamywang.mapchats.activity.friend.FriendsListActivity
@@ -17,6 +19,7 @@ import cn.iamywang.mapchats.util.list.UserListItem
 import com.alibaba.fastjson.JSON
 import com.amap.api.maps.model.LatLng
 import com.ohmerhe.kolley.request.Http
+import kotlinx.android.synthetic.main.app_bar_main.*
 import java.lang.Double
 import java.nio.charset.Charset
 import kotlin.collections.ArrayList
@@ -353,7 +356,7 @@ class JavaHttpKolley {
         }
     }
 
-    fun getFakeUserMsgList(id:String,act: MainActivity) {
+    fun getFakeUserMsgList(id: String, act: MainActivity) {
         Http.post {
             url = root + "/getUserMessageList/"
             params {
@@ -395,12 +398,75 @@ class JavaHttpKolley {
                     val nick1 = array.getJSONObject(i).getString("nick1")
                     val sex = array.getJSONObject(i).getString("sex")
                     val msg = array.getJSONObject(i).getString("msg")
-                    val time = array.getJSONObject(i).getString("time")
+                    var time = array.getJSONObject(i).getString("time")
+                    val time_year = time.split(' ')[0].split('.')[0].toInt()
+                    val time_month = time.split(' ')[0].split('.')[1].toInt()
+                    val time_day = time.split(' ')[0].split('.')[2].toInt()
+                    val calendar = Calendar.getInstance()
+                    if (time_year == calendar.get(Calendar.YEAR)) {
+                        if (time_month == (calendar.get(Calendar.MONTH) + 1)) {
+                            if (time_day == calendar.get(Calendar.DAY_OF_MONTH)) {
+                                time = time.split(' ')[1]
+                            }else {
+                                time = time_month.toString() + '.' + time_day.toString() + ' ' + time.split(' ')[1]
+                            }
+                        }
+                    }
                     val read = array.getJSONObject(i).getString("read")
                     act.list.add(MessageListItem(id1, nick1, sex, msg, time, read))
                     act.setAdapter()
                 }
             }
+        }
+        getChatOnlineStatus(remote_id, act)
+    }
+
+    fun getChatOnlineStatus(remote_id: String, act: ChatRoomActivity) {
+        if (remote_id != "0") {
+            Http.post {
+                url = root + "/getUserInfo/"
+                params {
+                    "id" - remote_id
+                }
+                onSuccess { bytes2 ->
+                    val res2 = bytes2.toString(Charset.defaultCharset())
+                    val array2 = JSON.parseObject(res2)
+                    val online = array2.getString("online")
+                    if (online == "online") {
+                        act.supportActionBar?.subtitle = "在线"
+                    } else {
+                        var time = array2.getString("login")
+                        val calendar = Calendar.getInstance()
+                        val time_year = time.split(' ')[0].split('.')[0].toInt()
+                        val time_month = time.split(' ')[0].split('.')[1].toInt()
+                        val time_day = time.split(' ')[0].split('.')[2].toInt()
+                        val time_hour = time.split(' ')[1].split(':')[0].toInt()
+                        val time_minute = time.split(' ')[1].split(':')[1].toInt()
+                        if (time_year == calendar.get(Calendar.YEAR)) {
+                            if (time_month == (calendar.get(Calendar.MONTH) + 1)) {
+                                if (time_day == calendar.get(Calendar.DAY_OF_MONTH)) {
+                                    time = time_hour.toString() + ':' + time_minute.toString()
+                                } else {
+                                    time =
+                                        time_month.toString() + '.' + time_day.toString() + ' ' + time_hour.toString() + ':' + time_minute.toString()
+                                }
+                            }
+                        }
+                        act.supportActionBar?.subtitle = "最近上线：" + time
+                    }
+                    val sex = array2.getString("sex")
+                    if (remote_id == "1") {
+                        act.supportActionBar?.setLogo(R.drawable.ic_user_admin)
+                    } else if (sex== "男") {
+                        act.supportActionBar?.setLogo(R.drawable.ic_user_color)
+                    } else if (sex == "女") {
+                        act.supportActionBar?.setLogo(R.drawable.ic_user_color_2)
+                    }
+                }
+            }
+        } else {
+            act.supportActionBar?.subtitle = ""
+            act.supportActionBar?.setLogo(R.drawable.ic_user_color_3)
         }
     }
 

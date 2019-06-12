@@ -77,7 +77,7 @@
         <activity
                 android:name=".activity.friend.ChatRoomActivity"
                 android:label="@string/title_activity_chat"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".activity.friend.LocationShareActivity"

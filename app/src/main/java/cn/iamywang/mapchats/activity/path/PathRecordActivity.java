@@ -306,7 +306,7 @@ public class PathRecordActivity extends AppCompatActivity implements LocationSou
             aMap.addMarker(new MarkerOptions().position(l).title("起点").snippet("起点"));
         }
         options.add(l);
-        options.width(15);
+        options.width(12);
         options.color(Color.argb(255, 0, 128, 255));
         options.lineJoinType(PolylineOptions.LineJoinType.LineJoinRound);
         options.lineCapType(PolylineOptions.LineCapType.LineCapRound);

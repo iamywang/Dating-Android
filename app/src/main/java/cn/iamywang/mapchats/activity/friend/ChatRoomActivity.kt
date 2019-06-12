@@ -3,14 +3,13 @@ package cn.iamywang.mapchats.activity.friend
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import cn.iamywang.mapchats.R
 import cn.iamywang.mapchats.util.list.MessageListItem
 import cn.iamywang.mapchats.util.list.MessageListItemAdapter
-import cn.iamywang.mapchats.util.list.UserItemAdapter
-import cn.iamywang.mapchats.util.list.UserListItem
 import cn.iamywang.mapchats.util.network.JavaHttpKolley
 import java.util.*
 
@@ -25,10 +24,13 @@ class ChatRoomActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(true)
-            actionBar.setDisplayHomeAsUpEnabled(true)
+        val actionBar = findViewById<Toolbar>(R.id.chatbar)
+        setSupportActionBar(actionBar)
+        window.statusBarColor = getColor(R.color.colorPrimaryDark)
+        val toolbar = supportActionBar
+        if (toolbar != null) {
+            toolbar.setHomeButtonEnabled(true)
+            toolbar.setDisplayHomeAsUpEnabled(true)
         }
 
         val chat_intent = intent
@@ -36,6 +38,9 @@ class ChatRoomActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         this.REMOTE_ID = chat_intent.getStringExtra("remote_id").toString()
         this.REMOTE_NAME = chat_intent.getStringExtra("remote_name").toString()
         title = this.REMOTE_NAME
+        actionBar.subtitle = "连接中..."
+        actionBar.setLogo(R.drawable.ic_user_color)
+        actionBar.logo.setBounds(0, 0, 48, 48)
 
         val v = findViewById<ConstraintLayout>(R.id.msg_item_view)
         v.visibility = View.INVISIBLE
