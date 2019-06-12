@@ -6,10 +6,6 @@
     <item android:title="@string/app_name">
         <menu>
             <item
-                    android:id="@+id/nav_home"
-                    android:icon="@drawable/ic_my"
-                    android:title="@string/menu_home"/>
-            <item
                     android:id="@+id/nav_map"
                     android:icon="@drawable/ic_map"
                     android:title="@string/menu_map"/>
@@ -29,7 +25,6 @@
                     android:id="@+id/nav_chat"
                     android:icon="@drawable/ic_chat"
                     android:title="@string/menu_chat"/>
-
         </menu>
     </item>
     <item android:title="@string/menu_about">

@@ -110,7 +110,7 @@ public class HisrotyLocationActivity extends AppCompatActivity {
         options.color(color);
         options.lineJoinType(PolylineOptions.LineJoinType.LineJoinRound);
         options.lineCapType(PolylineOptions.LineCapType.LineCapRound);
-        options.setDottedLine(true);
+//        options.setDottedLine(true);
         aMap.addMarker(new MarkerOptions().position(list.get(0)).title("起点").snippet(start));
         aMap.addPolyline(options);
         double result_length = 0.00;
@@ -145,11 +145,11 @@ public class HisrotyLocationActivity extends AppCompatActivity {
             public void run() {
                 try {
                     for (int i = 1; i < list.size(); i++) {
-                        Thread.sleep(400);
+                        Thread.sleep(200);
                         pathMarker.setPosition(list.get(i));
                         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(i), 18));
                     }
-                    Thread.sleep(400);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

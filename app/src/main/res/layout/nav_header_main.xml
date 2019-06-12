@@ -15,20 +15,19 @@
             android:id="@+id/nav_head_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:contentDescription="@string/menu_home"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            app:srcCompat="@drawable/ic_user"/>
+            app:srcCompat="@drawable/ic_user" android:onClick="startUserInfo"/>
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginLeft="8dp">
+            android:layout_height="wrap_content" android:layout_marginLeft="8dp" android:onClick="startUserInfo">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 android:id="@+id/textView_name" android:textSize="18sp" android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" android:onClick="startUserInfo"/>
         <TextView
                 android:id="@+id/textView_id"
                 android:layout_width="wrap_content"

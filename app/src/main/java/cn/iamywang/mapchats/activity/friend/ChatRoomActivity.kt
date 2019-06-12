@@ -44,8 +44,10 @@ class ChatRoomActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val thread = Thread(object : Runnable {
             override fun run() {
                 val jhk = JavaHttpKolley()
-                jhk.getChatMessages(USERID, REMOTE_ID, thread_this)
-                Thread.sleep(10000)
+                while (true) {
+                    jhk.getChatMessages(USERID, REMOTE_ID, thread_this)
+                    Thread.sleep(3000)
+                }
             }
         })
         thread.start()

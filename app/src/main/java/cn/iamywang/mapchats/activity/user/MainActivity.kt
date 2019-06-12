@@ -6,7 +6,6 @@ import android.support.constraint.ConstraintLayout
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -27,6 +26,8 @@ import cn.iamywang.mapchats.util.network.JavaHttpKolley
 import cn.iamywang.mapchats.util.list.UserItemAdapter
 import cn.iamywang.mapchats.util.list.UserListItem
 import java.util.*
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     AdapterView.OnItemClickListener {
@@ -80,8 +81,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     head_img.setImageResource(R.drawable.ic_user_color_2)
                 }
             }
-            val jhk = JavaHttpKolley()
-            jhk.getFakeUserMsgList(this)
+
+            val thread_this = this
+            val thread = Thread(object : Runnable {
+                override fun run() {
+                    val jhk = JavaHttpKolley()
+                    while (true) {
+                        jhk.getFakeUserMsgList(thread_this.USERID, thread_this)
+                        Thread.sleep(3000)
+                    }
+                }
+            })
+            thread.start()
         }
     }
 
@@ -118,12 +129,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val id = item.itemId
-        if (id == R.id.nav_home) {
-            val intent = Intent(this, UserInfoActivity::class.java)
-            intent.putExtra("id", this.USERID)
-            intent.putExtra("loc", "中国山东省济南市")
-            startActivity(intent)
-        } else if (id == R.id.nav_map) {
+        if (id == R.id.nav_map) {
             val intent = Intent(this, LocationShareActivity::class.java)
             intent.putExtra("id", this.USERID)
             startActivity(intent)
@@ -152,10 +158,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
             startActivity(intent)
         } else if (id == R.id.nav_share) {
-            val intent = Intent(this, FeedBackActivity::class.java)
-            intent.putExtra("id", this.USERID)
-            intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)
-            startActivity(intent)
+            val share_intent = Intent(Intent.ACTION_SEND)
+            share_intent.type = "text/plain"
+            share_intent.putExtra(Intent.EXTRA_TEXT, "分享内容")
+            startActivity(share_intent)
         } else if (id == R.id.nav_about) {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
@@ -163,5 +169,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun startUserInfo(view: View) {
+        val intent = Intent(this, UserInfoActivity::class.java)
+        intent.putExtra("id", this.USERID)
+        intent.putExtra("loc", "中国山东省济南市")
+        startActivity(intent)
     }
 }

@@ -353,30 +353,25 @@ class JavaHttpKolley {
         }
     }
 
-    fun getFakeUserMsgList(act: MainActivity) {
-        Http.get {
-            url = root + "/getUsers/?key=all"
+    fun getFakeUserMsgList(id:String,act: MainActivity) {
+        Http.post {
+            url = root + "/getUserMessageList/"
+            params {
+                "id" - id
+            }
             onSuccess { bytes ->
                 val res = bytes.toString(Charset.defaultCharset())
                 val array = JSON.parseArray(res)
-                act.list.add(
-                    UserListItem("0", "聊天室", "room", "点击进入聊天室", "", "0")
-                )
+                act.list.clear()
                 act.setAdapter()
                 for (i in array.indices) {
                     val userid = array.getJSONObject(i).getString("id")
-                    val username = array.getJSONObject(i).getString("name")
+                    val username = array.getJSONObject(i).getString("nick")
                     val sex = array.getJSONObject(i).getString("sex")
-                    act.list.add(
-                        UserListItem(
-                            userid,
-                            username,
-                            sex,
-                            "点击开始聊天",
-                            "",
-                            "0"
-                        )
-                    )
+                    val msg = array.getJSONObject(i).getString("msg")
+                    val time = array.getJSONObject(i).getString("time")
+                    val read = array.getJSONObject(i).getString("read")
+                    act.list.add(UserListItem(userid, username, sex, msg, time, read))
                     act.setAdapter()
                 }
             }

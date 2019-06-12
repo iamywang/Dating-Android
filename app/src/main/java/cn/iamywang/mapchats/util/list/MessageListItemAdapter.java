@@ -50,14 +50,16 @@ public class MessageListItemAdapter extends BaseAdapter {
         msg_item_name.setText(mData.get(position).getMessage_name());
         msg_item_msg.setText(mData.get(position).getMessage_msg());
         msg_item_time.setText(mData.get(position).getMessage_time());
-        if (mData.get(position).getMessage_sex().equals("男")) {
+        if (mData.get(position).getMessage_id().equals("1")) {
+            head_image.setImageResource(R.drawable.ic_user_admin);
+        } else if (mData.get(position).getMessage_sex().equals("男")) {
             head_image.setImageResource(R.drawable.ic_user_color);
         } else {
             head_image.setImageResource(R.drawable.ic_user_color_2);
         }
         if (mData.get(position).getMessage_read().equals("yes")) {
             msg_item_read.setText("已读");
-        } else if(mData.get(position).getMessage_read().equals("no")) {
+        } else if (mData.get(position).getMessage_read().equals("no")) {
             msg_item_read.setText("未读");
             msg_item_read.setTextColor(Color.RED);
         }
