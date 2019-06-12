@@ -38,9 +38,11 @@ class FriendsListActivity : AppCompatActivity(), AdapterView.OnItemClickListener
         list_view.adapter = mAdapter
         list_view.setOnItemClickListener(this)
     }
+
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.getItemId() == android.R.id.home) {
             this.finish()

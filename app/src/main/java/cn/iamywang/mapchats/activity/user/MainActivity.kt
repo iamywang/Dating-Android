@@ -16,6 +16,7 @@ import android.widget.*
 
 import cn.iamywang.mapchats.R
 import cn.iamywang.mapchats.activity.friend.ChatRoomActivity
+import cn.iamywang.mapchats.activity.friend.ExploreActivity
 import cn.iamywang.mapchats.activity.friend.FriendsListActivity
 import cn.iamywang.mapchats.activity.friend.LocationShareActivity
 import cn.iamywang.mapchats.activity.misc.AboutActivity
@@ -152,7 +153,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("remote_id", "0")
             intent.putExtra("remote_name", "聊天室")
             startActivity(intent)
-        } else if (id == R.id.nav_feed) {
+        } else if (id == R.id.nav_explore) {
+            val intent = Intent(this, ExploreActivity::class.java)
+            startActivity(intent)
+        }else if (id == R.id.nav_feed) {
             val intent = Intent(this, FeedBackActivity::class.java)
             intent.putExtra("id", this.USERID)
             intent.putExtra("nick", findViewById<TextView>(R.id.textView_name).text)

@@ -160,7 +160,7 @@ public class HisrotyLocationActivity extends AppCompatActivity {
         }
         PathReviewThread t = new PathReviewThread(list, pathMarker);
         t.start();
-        aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).position(list.get(list.size() - 1)).title("终点").snippet(end));
+        aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).position(list.get(list.size() - 1)).title("终点").snippet(end));
     }
 
     public double calculateLineDistance(LatLng start, LatLng end) {

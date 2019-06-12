@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+      xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
 
-    <item android:title="@string/app_name">
+    <item android:title="地图">
         <menu>
             <item
                     android:id="@+id/nav_map"
@@ -17,6 +17,10 @@
                     android:id="@+id/nav_gps"
                     android:icon="@drawable/ic_history"
                     android:title="@string/menu_gps"/>
+        </menu>
+    </item>
+    <item android:title="交友">
+        <menu>
             <item
                     android:id="@+id/nav_friends"
                     android:icon="@drawable/ic_friend"
@@ -25,9 +29,13 @@
                     android:id="@+id/nav_chat"
                     android:icon="@drawable/ic_chat"
                     android:title="@string/menu_chat"/>
+            <item
+                    android:id="@+id/nav_explore"
+                    android:icon="@drawable/ic_map"
+                    android:title="@string/menu_explore"/>
         </menu>
     </item>
-    <item android:title="@string/menu_about">
+    <item android:title="其他">
         <menu>
             <item
                     android:id="@+id/nav_share"

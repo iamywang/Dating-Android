@@ -1,7 +1,6 @@
 package cn.iamywang.mapchats.util.network
 
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.icu.util.Calendar
 import android.widget.Toast
 import cn.iamywang.mapchats.R
@@ -19,7 +18,6 @@ import cn.iamywang.mapchats.util.list.UserListItem
 import com.alibaba.fastjson.JSON
 import com.amap.api.maps.model.LatLng
 import com.ohmerhe.kolley.request.Http
-import kotlinx.android.synthetic.main.app_bar_main.*
 import java.lang.Double
 import java.nio.charset.Charset
 import kotlin.collections.ArrayList
@@ -267,6 +265,10 @@ class JavaHttpKolley {
             onSuccess { bytes ->
                 // handle data
                 Toast.makeText(act, bytes.toString(Charset.defaultCharset()), Toast.LENGTH_LONG).show()
+                val lintent = act.intent
+                lintent.putExtra("id", id)
+                lintent.putExtra("passwd", passwd)
+                act.setResult(209, lintent)
                 act.finish()
             }
         }
@@ -407,7 +409,7 @@ class JavaHttpKolley {
                         if (time_month == (calendar.get(Calendar.MONTH) + 1)) {
                             if (time_day == calendar.get(Calendar.DAY_OF_MONTH)) {
                                 time = time.split(' ')[1]
-                            }else {
+                            } else {
                                 time = time_month.toString() + '.' + time_day.toString() + ' ' + time.split(' ')[1]
                             }
                         }
@@ -458,7 +460,7 @@ class JavaHttpKolley {
                     val sex = array2.getString("sex")
                     if (remote_id == "1") {
                         act.supportActionBar?.setLogo(R.drawable.ic_user_admin)
-                    } else if (sex== "男") {
+                    } else if (sex == "男") {
                         act.supportActionBar?.setLogo(R.drawable.ic_user_color)
                     } else if (sex == "女") {
                         act.supportActionBar?.setLogo(R.drawable.ic_user_color_2)

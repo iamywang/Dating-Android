@@ -55,6 +55,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onButtonClick1(view: View) {
-        startActivity(Intent(this, RegisterActivity::class.java))
+        startActivityForResult(Intent(this, RegisterActivity::class.java),208)
+    }
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // 在申请码和返回码都符合的时候，接收返回的数据
+        if (requestCode == 208 && resultCode == 209) {
+            val id = data!!.getStringExtra("id").toString()
+            val passwd = data.getStringExtra("passwd").toString()
+            val id_view = findViewById<EditText>(R.id.editText)
+            val passwd_view = findViewById<EditText>(R.id.editText2)
+            id_view.setText(id)
+            passwd_view.setText(passwd)
+        }
     }
 }

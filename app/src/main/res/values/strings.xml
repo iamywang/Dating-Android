@@ -1,15 +1,16 @@
 <resources>
-    <string name="app_name">GPS地图社交</string>
+    <string name="app_name">Dating</string>
     <string name="app_author">© iamywang 2019</string>
 
-    <string name="menu_map">地图</string>
+    <string name="menu_map">位置共享</string>
     <string name="menu_gps">历史轨迹</string>
-    <string name="menu_path">轨迹记录</string>
+    <string name="menu_path">记录轨迹</string>
     <string name="menu_friends">好友列表</string>
     <string name="menu_chat">聊天室</string>
-    <string name="menu_share">分享</string>
+    <string name="menu_explore">探索</string>
+    <string name="menu_share">分享应用</string>
     <string name="menu_feed">问题反馈</string>
-    <string name="menu_about">关于</string>
+    <string name="menu_about">关于程序</string>
 
     <string name="username">用户名</string>
     <string name="passwd">密码</string>
@@ -30,11 +31,12 @@
     <string name="title_activity_login">登录</string>
     <string name="title_activity_user">个人信息</string>
     <string name="title_activity_reg">注册</string>
-    <string name="title_activity_map">地图</string>
+    <string name="title_activity_map">位置共享</string>
+    <string name="title_activity_explore">探索</string>
     <string name="title_activity_history">历史轨迹</string>
     <string name="title_activity_gps">轨迹回放</string>
-    <string name="title_activity_path">轨迹记录</string>
-    <string name="title_activity_path_result">结果</string>
+    <string name="title_activity_path">记录轨迹</string>
+    <string name="title_activity_path_result">记录结果</string>
     <string name="title_activity_friend">好友列表</string>
     <string name="title_activity_chat">聊天室</string>
     <string name="title_activity_feed">问题反馈</string>
