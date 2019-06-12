@@ -413,6 +413,7 @@ class JavaHttpKolley {
                         }
                     }
                     val read = array.getJSONObject(i).getString("read")
+                    time = "  " + time + "  "
                     act.list.add(MessageListItem(id1, nick1, sex, msg, time, read))
                     act.setAdapter()
                 }
@@ -440,15 +441,15 @@ class JavaHttpKolley {
                         val time_year = time.split(' ')[0].split('.')[0].toInt()
                         val time_month = time.split(' ')[0].split('.')[1].toInt()
                         val time_day = time.split(' ')[0].split('.')[2].toInt()
-                        val time_hour = time.split(' ')[1].split(':')[0].toInt()
-                        val time_minute = time.split(' ')[1].split(':')[1].toInt()
+                        val time_hour = time.split(' ')[1].split(':')[0]
+                        val time_minute = time.split(' ')[1].split(':')[1]
                         if (time_year == calendar.get(Calendar.YEAR)) {
                             if (time_month == (calendar.get(Calendar.MONTH) + 1)) {
                                 if (time_day == calendar.get(Calendar.DAY_OF_MONTH)) {
-                                    time = time_hour.toString() + ':' + time_minute.toString()
+                                    time = time_hour + ':' + time_minute
                                 } else {
                                     time =
-                                        time_month.toString() + '.' + time_day.toString() + ' ' + time_hour.toString() + ':' + time_minute.toString()
+                                        time_month.toString() + '.' + time_day.toString() + ' ' + time_hour + ':' + time_minute
                                 }
                             }
                         }

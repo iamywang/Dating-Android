@@ -22,7 +22,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"
-                android:background="@color/split_bar"/>
+                android:background="@android:color/darker_gray" android:textColor="@android:color/white"/>
         <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp" app:srcCompat="@drawable/ic_user_color"

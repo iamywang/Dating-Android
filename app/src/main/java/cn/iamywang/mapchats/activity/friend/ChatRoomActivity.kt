@@ -63,6 +63,7 @@ class ChatRoomActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         list_view.dividerHeight = 0
         list_view.adapter = mAdapter
         list_view.setOnItemClickListener(this)
+        list_view.setSelection(mAdapter.count - 1)
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
